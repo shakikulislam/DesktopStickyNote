@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
@@ -83,8 +84,8 @@
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelTitleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Desktop Sticky Note";
             this.TopMost = true;
