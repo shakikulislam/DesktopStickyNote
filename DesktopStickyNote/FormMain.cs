@@ -66,5 +66,10 @@ namespace DesktopStickyNote
             _keyNote.SetValue("Note", richTextBoxNote.Text);
         }
 
+        private void pictureBoxSettings_Click(object sender, EventArgs e)
+        {
+            new FormSettings().ShowDialog();
+        }
+
     }
 }

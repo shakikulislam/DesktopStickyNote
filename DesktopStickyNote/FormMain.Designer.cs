@@ -28,15 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
+            this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
+            this.panelTitleBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitleBar
             // 
             this.panelTitleBar.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelTitleBar.Controls.Add(this.pictureBoxSettings);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.panelTitleBar.Name = "panelTitleBar";
@@ -74,6 +80,20 @@
             this.richTextBoxNote.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
             this.richTextBoxNote.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
             // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSettings.Image = global::DesktopStickyNote.Properties.Resources.settings_32;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(190, 8);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(25, 25);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxSettings.TabIndex = 3;
+            this.pictureBoxSettings.TabStop = false;
+            this.toolTipMain.SetToolTip(this.pictureBoxSettings, "Settings");
+            this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,6 +112,8 @@
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
             this.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
+            this.panelTitleBar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -101,6 +123,8 @@
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Panel panelFooter;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
+        private System.Windows.Forms.PictureBox pictureBoxSettings;
+        private System.Windows.Forms.ToolTip toolTipMain;
     }
 }
 
