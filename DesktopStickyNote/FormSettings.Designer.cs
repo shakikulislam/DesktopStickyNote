@@ -102,17 +102,18 @@
             // 
             this.panelSetting.BackColor = System.Drawing.Color.White;
             this.panelSetting.Controls.Add(this.checkBoxAllwaseVisible);
+            this.panelSetting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelSetting.Location = new System.Drawing.Point(154, 104);
+            this.panelSetting.Location = new System.Drawing.Point(133, 3);
             this.panelSetting.Name = "panelSetting";
-            this.panelSetting.Size = new System.Drawing.Size(340, 218);
+            this.panelSetting.Size = new System.Drawing.Size(390, 434);
             this.panelSetting.TabIndex = 1;
             this.panelSetting.Visible = false;
             // 
             // checkBoxAllwaseVisible
             // 
             this.checkBoxAllwaseVisible.AutoSize = true;
-            this.checkBoxAllwaseVisible.Location = new System.Drawing.Point(76, 64);
+            this.checkBoxAllwaseVisible.Location = new System.Drawing.Point(118, 21);
             this.checkBoxAllwaseVisible.Name = "checkBoxAllwaseVisible";
             this.checkBoxAllwaseVisible.Size = new System.Drawing.Size(111, 21);
             this.checkBoxAllwaseVisible.TabIndex = 0;
@@ -135,8 +136,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(523, 437);
-            this.Controls.Add(this.panelSideMenu);
             this.Controls.Add(this.panelSetting);
+            this.Controls.Add(this.panelSideMenu);
             this.Controls.Add(this.panelTopBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
