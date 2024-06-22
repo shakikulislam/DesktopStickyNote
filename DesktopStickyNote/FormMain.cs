@@ -8,7 +8,9 @@ namespace DesktopStickyNote
 {
     public partial class FormMain : Form
     {
-        RegistryKey _keyNote = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Desktop Sticky Note", true);
+        public RegistryKey _keyNote = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Desktop Sticky Note", true);
+        public string[] _font = { "Microsoft Sans Serif", "10", "Regular" };
+        public Font _newFont;
 
         private int _dWidth = 0;
         private int _dHeight = 0;
@@ -26,6 +28,7 @@ namespace DesktopStickyNote
             {
                 _dHeight = Screen.GetWorkingArea(this).Height;
                 _dWidth = Screen.GetWorkingArea(this).Width;
+                this.Height = _dHeight - 150;
                 _rightCenter = (_dHeight / 2) - (this.Height / 2);
 
                 if (allwaseVisible)
@@ -74,16 +77,24 @@ namespace DesktopStickyNote
 
                 richTextBoxNote.Text = Settings.Default.noteMessage;
 
+                //Autorun path when Windows starts
                 RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 key.SetValue("Desktop Sticky Note", Application.ExecutablePath);
 
+                //Store key create
                 RegistryKey createSubKey = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
                 createSubKey.CreateSubKey("Desktop Sticky Note");
-                
+
+                _font = _keyNote.GetValue("Font").ToString().Split(',');
+
                 richTextBoxNote.Text = _keyNote.GetValue("Note").ToString();
+                
             }
             catch { }
 
+            _newFont = new Font(_font[0], float.Parse(_font[1]), (FontStyle)Enum.Parse(typeof(FontStyle), _font[2]));
+            richTextBoxNote.Font = _newFont;
+            richTextBoxNote.ForeColor = Color.Black;
         }
 
         private void FormMain_MouseHover(object sender, EventArgs e)
@@ -98,9 +109,11 @@ namespace DesktopStickyNote
 
         private void richTextBoxNote_TextChanged(object sender, EventArgs e)
         {
-            //Settings.Default.noteMessage = richTextBoxNote.Text;
-            //Settings.Default.Save();
             _keyNote.SetValue("Note", richTextBoxNote.Text);
+
+            richTextBoxNote.Font = _newFont;
+            richTextBoxNote.Refresh();
+            Application.DoEvents();
         }
 
         private void pictureBoxSettings_Click(object sender, EventArgs e)
