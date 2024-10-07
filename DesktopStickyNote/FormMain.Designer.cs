@@ -35,8 +35,11 @@
             this.panelFooter = new System.Windows.Forms.Panel();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
+            this.timerRemainder = new System.Windows.Forms.Timer(this.components);
+            this.labelTotalEvents = new System.Windows.Forms.Label();
             this.panelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
+            this.panelFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitleBar
@@ -68,6 +71,7 @@
             // panelFooter
             // 
             this.panelFooter.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelFooter.Controls.Add(this.labelTotalEvents);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelFooter.Location = new System.Drawing.Point(0, 364);
             this.panelFooter.Name = "panelFooter";
@@ -94,6 +98,22 @@
             this.richTextBoxNote.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
             this.richTextBoxNote.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
             // 
+            // timerRemainder
+            // 
+            this.timerRemainder.Enabled = true;
+            this.timerRemainder.Interval = 1000;
+            this.timerRemainder.Tick += new System.EventHandler(this.timerRemainder_Tick);
+            // 
+            // labelTotalEvents
+            // 
+            this.labelTotalEvents.AutoSize = true;
+            this.labelTotalEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalEvents.Location = new System.Drawing.Point(6, 12);
+            this.labelTotalEvents.Name = "labelTotalEvents";
+            this.labelTotalEvents.Size = new System.Drawing.Size(107, 16);
+            this.labelTotalEvents.TabIndex = 0;
+            this.labelTotalEvents.Text = "Total Events 0";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +134,8 @@
             this.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
             this.panelTitleBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
+            this.panelFooter.ResumeLayout(false);
+            this.panelFooter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -125,6 +147,8 @@
         private System.Windows.Forms.PictureBox pictureBoxSettings;
         private System.Windows.Forms.ToolTip toolTipMain;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
+        private System.Windows.Forms.Timer timerRemainder;
+        private System.Windows.Forms.Label labelTotalEvents;
     }
 }
 

@@ -11,6 +11,7 @@ namespace DesktopStickyNote
         public RegistryKey _keyNote = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Desktop Sticky Note", true);
         public string[] _font = { "Microsoft Sans Serif", "10", "Regular" };
         public Font _newFont;
+        public string _events;
 
         private int _dWidth = 0;
         private int _dHeight = 0;
@@ -19,6 +20,8 @@ namespace DesktopStickyNote
         public FormMain()
         {
             InitializeComponent();
+
+
         }
 
         private void ViewSticky(bool loadTime = false, bool mouseHover = false)
@@ -88,6 +91,8 @@ namespace DesktopStickyNote
                 _font = _keyNote.GetValue("Font").ToString().Split(',');
 
                 richTextBoxNote.Text = _keyNote.GetValue("Note").ToString();
+
+                _events = _keyNote.GetValue("Events").ToString();
                 
             }
             catch { }
@@ -119,6 +124,12 @@ namespace DesktopStickyNote
         private void pictureBoxSettings_Click(object sender, EventArgs e)
         {
             new FormSettings().ShowDialog();
+        }
+
+        private void timerRemainder_Tick(object sender, EventArgs e)
+        {
+            var @event = _events.Split('|');
+            labelTotalEvents.Text = @"Total Events " + @event.Length;
         }
 
     }
