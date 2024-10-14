@@ -2,16 +2,14 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DesktopStickyNote.Properties;
 using DesktopStickyNote.Theme;
 
 namespace DesktopStickyNote
 {
     public partial class FormSettings : Form
     {
-        FormMain formMain = new FormMain();
-        private Font newFont;
-        private string _categorie;
+        private readonly Font _newFont;
+        private string _categories;
         private string _dateFormat = "dd-MMM-yy HH:mm:ss";
         private string _events;
 
@@ -21,19 +19,12 @@ namespace DesktopStickyNote
             InitializeComponent();
             LoadSettings();
 
-            try
-            {
-                var font = formMain._keyNote.GetValue("Font").ToString().Split(',');
-                newFont = new Font(font[0], float.Parse(font[1]), (FontStyle)Enum.Parse(typeof(FontStyle), font[2]));
-            }
-            catch
-            {
-                // ignored
-            }
+            _newFont = GlobalSs.GetFont();
 
-            labelFontFamily.Text = newFont.Name;
-            labelFontSize.Text = newFont.Size.ToString();
-            labelFontStyle.Text = newFont.Style.ToString();
+            labelFontFamily.Text = _newFont.Name;
+            labelFontFamily.ForeColor = GlobalSs.FontColor;
+            labelFontSize.Text = _newFont.Size.ToString("");
+            labelFontStyle.Text = _newFont.Style.ToString();
 
 
             dateTimePickerFrom.Format = DateTimePickerFormat.Custom;
@@ -50,27 +41,38 @@ namespace DesktopStickyNote
         {
             try
             {
-                _events = formMain._keyNote.GetValue("Events").ToString();
-                formMain._events = _events;
+                GlobalSs.Events = GlobalSs.GetValue("Events");
+                _events = GlobalSs.Events;
 
                 if (!string.IsNullOrEmpty(_events))
                 {
+                    listViewEventList.Items.Clear();
+
                     var events = _events.Split('|');
                     foreach (var @event in events)
                     {
-                        var item = @event.Split(',');
+                        var item = @event.Split('~');
                         
                         var lvi=new ListViewItem(item[0]);
                         lvi.SubItems.Add(item[1]);
                         lvi.SubItems.Add(Convert.ToDateTime(item[2]).ToString("dd-MMM-yy"));
                         lvi.SubItems.Add(Convert.ToDateTime(item[3]).ToString("dd-MMM-yy"));
                         lvi.SubItems.Add(item[4]);
+                        lvi.SubItems.Add(item[2]);
+                        lvi.SubItems.Add(item[3]);
 
                         listViewEventList.Items.Add(lvi);
                     }
                 }
 
                 listViewEventList.Refresh();
+
+                if (buttonCancelEvent.Visible)
+                {
+                    buttonCancelEvent.PerformClick();
+                }
+                
+                Application.DoEvents();
             }
             catch
             {
@@ -83,16 +85,16 @@ namespace DesktopStickyNote
         {
             try
             {
-                _categorie = formMain._keyNote.GetValue("Category").ToString();
+                _categories = GlobalSs.GetValue("Category");
 
                 comboBoxCaregory.Items.Clear();
-                foreach (var category in _categorie.Split(','))
+                foreach (var category in _categories.Split(','))
                 {
                     comboBoxCaregory.Items.Add(category);
                 }
                 comboBoxCaregory.Refresh();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //
             }
@@ -126,7 +128,7 @@ namespace DesktopStickyNote
 
         private void LoadSettings()
         {
-            checkBoxAllwaseVisible.Checked = Settings.Default.AllwaseVisible;
+            checkBoxAlwaysVisible.Checked = GlobalSs.AlwaysVisible;
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
@@ -139,29 +141,30 @@ namespace DesktopStickyNote
         {
             ActiveSection.ActiveButton(sender, panelSideMenu);
             ShowForm(panelReminder);
+            buttonCancelEvent.PerformClick();
         }
 
-        private void checkBoxAllwaseVisible_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxAlwaysVisible_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.AllwaseVisible = checkBoxAllwaseVisible.Checked;
-            Settings.Default.Save();
+            GlobalSs.SetValue("AlwaysVisible", checkBoxAlwaysVisible.Checked.ToString());
         }
 
         private void buttonSelectFont_Click(object sender, EventArgs e)
         {
-            var fontDialog = new FontDialog() {
-                Font = new Label() { Font = newFont }.Font
+            var fontDialog = new FontDialog()
+            {
+                Font = GlobalSs.GetFont(),
+                ShowColor = true,
+                Color = GlobalSs.FontColor
             };
+
                         
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 var fontDtl = fontDialog.Font.Name + "," + fontDialog.Font.Size + "," + fontDialog.Font.Style;
 
-                formMain._keyNote.SetValue("Font", fontDtl);
-
-                labelFontFamily.Text = fontDialog.Font.Name.ToString();
-                labelFontSize.Text = fontDialog.Font.Size.ToString();
-                labelFontStyle.Text = fontDialog.Font.Style.ToString();
+                GlobalSs.SetValue("Font", fontDtl);
+                GlobalSs.SetValue("FontColor", fontDialog.Color.Name);
 
                 fontDialog.Dispose();
 
@@ -188,7 +191,7 @@ namespace DesktopStickyNote
 
             try
             {
-                if (_categorie.Split(',').Any(item => item == newCategory))
+                if (_categories.Split(',').Any(item => item == newCategory))
                 {
                     MessageBox.Show(@"This category already exist",@"Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     textBoxNewCategory.SelectAll();
@@ -201,16 +204,16 @@ namespace DesktopStickyNote
                 //
             }
 
-            if (string.IsNullOrEmpty(_categorie))
+            if (string.IsNullOrEmpty(_categories))
             {
-                _categorie = newCategory;
+                _categories = newCategory;
             }
             else
             {
-                _categorie += "," + newCategory;
+                _categories += "," + newCategory;
             }
 
-            formMain._keyNote.SetValue("Category", _categorie);
+            GlobalSs.SetValue("Category", _categories);
 
             LoadCategory();
 
@@ -231,33 +234,136 @@ namespace DesktopStickyNote
 
         private void buttonAddEvent_Click(object sender, EventArgs e)
         {
-            var date = DateTime.Now;
-            var id =  date.Year.ToString().Substring(2) + "" + date.Month + "" + date.Day + "" + date.Hour + "" + date.Minute + "" + date.Second;
-
-            var evnt = new Event
+            if (string.IsNullOrEmpty(comboBoxCaregory.Text))
             {
-                Id = id,
-                Category = comboBoxCaregory.Text,
-                FromDate = dateTimePickerFrom.Value,
-                ToDate = dateTimePickerTo.Value,
-                Details = richTextBoxDetails.Text.Trim()
-            };
-
-            var newEvent = evnt.Id + "," + evnt.Category + "," + evnt.FromDate + "," + evnt.ToDate + "," + evnt.Details;
-            
-            var allEvents = string.IsNullOrEmpty(_events) ? newEvent : _events + "|" + newEvent;
-
-            try
-            {
-                formMain._keyNote.SetValue("Events", allEvents);
-                LoadEvent();
+                MessageBox.Show(@"Please Select Category", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch 
+
+            if (dateTimePickerFrom.Value > dateTimePickerTo.Value)
             {
-                //
+                MessageBox.Show(@"Invalid Date Range", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            var category = comboBoxCaregory.Text;
+            var fromDate = dateTimePickerFrom.Value;
+            var toDate = dateTimePickerTo.Value;
+            var details = string.IsNullOrEmpty(richTextBoxDetails.Text.Trim())
+                ? "No Details"
+                : richTextBoxDetails.Text.Trim();
+            
+
+            if (buttonAddEvent.Text == @"Add Event")
+            {
+                var date = DateTime.Now;
+                var id =  date.Year.ToString().Substring(2) + "" + date.Month + "" + date.Day + "" + date.Hour + "" + date.Minute + "" + date.Second;
+
+                var newEvent = id + "~" + category + "~" + fromDate + "~" + toDate + "~" + details;
+            
+                var allEvents = string.IsNullOrEmpty(_events) ? newEvent : _events + "|" + newEvent;
+
+                try
+                {
+                    GlobalSs.SetValue("Events", allEvents);
+                    LoadEvent();
+                }
+                catch 
+                {
+                    //
+                }
+            }
+            else if (buttonAddEvent.Text == @"Update")
+            {
+                if (string.IsNullOrEmpty(_events)) return;
+
+                var events = _events.Split('|').ToList();
+
+                for (int i = 0; i < events.Count; i++)
+                {
+                    var eventItems = events[i].Split('~');
+
+                    if (eventItems[0] == labelRemainder.Tag.ToString())
+                    {
+                        // Update the event with new details
+                        eventItems[1] = category;
+                        eventItems[2] = fromDate + "";
+                        eventItems[3] = toDate + "";
+                        eventItems[4] = details;
+
+                        // Rebuild the updated event string
+                        events[i] = string.Join("~", eventItems);
+                        break;
+                    }
+                }
+
+                var newList = string.Join("|", events);
+                GlobalSs.SetValue("Events", newList);
+
+                LoadEvent();
             }
 
         }
+
+        private void listViewEventList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var lv = listViewEventList.SelectedItems;
+            if (lv.Count==1)
+            {
+                buttonAddEvent.Size = new Size(100, 30);
+                buttonAddEvent.Text = @"Update";
+                pictureBoxDeleteEvent.Visible = true;
+                buttonCancelEvent.Visible = true;
+
+                labelRemainder.Tag = lv[0].SubItems[columnHeaderId.Index].Text;
+                comboBoxCaregory.Text = lv[0].SubItems[columnHeaderCategory.Index].Text;
+                richTextBoxDetails.Text = lv[0].SubItems[columnHeaderDetails.Index].Text;
+                dateTimePickerFrom.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderFromDateFull.Index].Text);
+                dateTimePickerTo.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderToDateFull.Index].Text);
+            }
+        }
+
+        private void buttonCancelEvent_Click(object sender, EventArgs e)
+        {
+            labelRemainder.Tag = "";
+            richTextBoxDetails.Clear();
+            dateTimePickerFrom.Value = DateTime.Today;
+            dateTimePickerTo.Value = DateTime.Today;
+
+            buttonAddEvent.Size = new Size(100, 54);
+            buttonAddEvent.Text = @"Add Event";
+            pictureBoxDeleteEvent.Visible = false;
+            buttonCancelEvent.Visible = false;
+        }
+
+        private void pictureBoxDeleteEvent_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(_events)) return;
+
+                var events = _events.Split('|').ToList();
+
+                // Find and remove the event by ID
+                events.RemoveAll(s =>
+                {
+                    var eventItems = s.Split('~');
+                    return eventItems[0] == labelRemainder.Tag.ToString();
+                });
+
+                // Join the updated list back into a single string
+                var newList = string.Join("|", events);
+                GlobalSs.SetValue("Events", newList);
+
+                LoadEvent();
+            }
+            catch
+            {
+                //
+            }
+        }
+
 
     }
 }

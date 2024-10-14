@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(370, 149);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAlert";
+            this.ShowIcon = false;
             this.Text = "FormAlert";
             this.ResumeLayout(false);
 

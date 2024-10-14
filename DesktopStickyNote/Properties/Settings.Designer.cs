@@ -22,29 +22,5 @@ namespace DesktopStickyNote.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string noteMessage {
-            get {
-                return ((string)(this["noteMessage"]));
-            }
-            set {
-                this["noteMessage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AllwaseVisible {
-            get {
-                return ((bool)(this["AllwaseVisible"]));
-            }
-            set {
-                this["AllwaseVisible"] = value;
-            }
-        }
     }
 }
