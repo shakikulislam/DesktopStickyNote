@@ -2,39 +2,28 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DesktopStickyNote.Properties;
 using DesktopStickyNote.Theme;
 
 namespace DesktopStickyNote
 {
     public partial class FormSettings : Form
     {
-        private readonly Font _newFont;
         private string _categories;
         private string _dateFormat = "dd-MMM-yy HH:mm:ss";
         private string _events;
 
         public FormSettings()
         {
-
             InitializeComponent();
             LoadSettings();
 
-            _newFont = GlobalSs.GetFont();
+            var newFont = GlobalSs.GetFont();
 
-            labelFontFamily.Text = _newFont.Name;
+            labelFontFamily.Text = newFont.Name;
             labelFontFamily.ForeColor = GlobalSs.FontColor;
-            labelFontSize.Text = _newFont.Size.ToString("");
-            labelFontStyle.Text = _newFont.Style.ToString();
-
-
-            dateTimePickerFrom.Format = DateTimePickerFormat.Custom;
-            dateTimePickerFrom.CustomFormat = _dateFormat;
-
-            dateTimePickerTo.Format = DateTimePickerFormat.Custom;
-            dateTimePickerTo.CustomFormat = _dateFormat;
-
-            LoadCategory();
-            LoadEvent();
+            labelFontSize.Text = newFont.Size.ToString("");
+            labelFontStyle.Text = newFont.Style.ToString();
         }
         
         private void LoadEvent()
@@ -85,14 +74,29 @@ namespace DesktopStickyNote
         {
             try
             {
-                _categories = GlobalSs.GetValue("Category");
+                GlobalSs.Category = GlobalSs.GetValue("Category");
+                _categories = GlobalSs.Category;
 
-                comboBoxCaregory.Items.Clear();
-                foreach (var category in _categories.Split(','))
+                if (!string.IsNullOrEmpty(_categories))
                 {
-                    comboBoxCaregory.Items.Add(category);
+                    comboBoxCaregory.Items.Clear();
+                    listViewCategory.Items.Clear();
+
+                    var categories = _categories.Split('|');
+                    foreach (var category in categories)
+                    {
+                        var item = category.Split('~');
+
+                        comboBoxCaregory.Items.Add(item[1]);
+
+                        var lvi = new ListViewItem(item[0]);
+                        lvi.SubItems.Add(item[1]);
+
+                        listViewCategory.Items.Add(lvi);
+                    }
+                    comboBoxCaregory.Refresh();
                 }
-                comboBoxCaregory.Refresh();
+
             }
             catch (Exception)
             {
@@ -141,7 +145,23 @@ namespace DesktopStickyNote
         {
             ActiveSection.ActiveButton(sender, panelSideMenu);
             ShowForm(panelReminder);
-            buttonCancelEvent.PerformClick();
+
+            dateTimePickerFrom.Format = DateTimePickerFormat.Custom;
+            dateTimePickerFrom.CustomFormat = _dateFormat;
+
+            dateTimePickerTo.Format = DateTimePickerFormat.Custom;
+            dateTimePickerTo.CustomFormat = _dateFormat;
+
+            groupBoxCategory.Location = new Point(10, 70);
+            groupBoxCategory.Height = 180;
+            groupBoxCategory.Visible = false;
+
+            groupBoxEvent.Location=new Point(10,70);
+            groupBoxEvent.Height = 180;
+            groupBoxEvent.Visible = true;
+
+            LoadCategory();
+            LoadEvent();
         }
 
         private void checkBoxAlwaysVisible_CheckedChanged(object sender, EventArgs e)
@@ -174,64 +194,91 @@ namespace DesktopStickyNote
 
         private void pictureBoxAddCategory_Click(object sender, EventArgs e)
         {
-            labelNewCategory.Visible = true;
-            textBoxNewCategory.Visible = true;
-            buttonAddCategory.Visible = true; 
-            buttonCancelCategory.Visible = true;
+            if (pictureBoxAddCategory.Tag == null)
+            {
+                groupBoxEvent.Visible = false;
+                groupBoxCategory.Visible = true;
 
-            textBoxNewCategory.Clear();
-            textBoxNewCategory.Focus();
+                pictureBoxAddCategory.Image = Resources.minus_64;
+                pictureBoxAddCategory.Tag = "update";
+            }
+            else if (pictureBoxAddCategory.Tag.ToString() == "update")
+            {
+                if (buttonCancelCategory.Visible)
+                {
+                    buttonCancelCategory.PerformClick();
+                }
 
-            groupBoxEvent.Visible = false;
+                groupBoxEvent.Visible = true;
+                groupBoxCategory.Visible = false;
+
+                pictureBoxAddCategory.Image = Resources.edit_property_64;
+                pictureBoxAddCategory.Tag = null;
+            }
+
         }
 
         private void buttonAddCategory_Click(object sender, EventArgs e)
         {
-            var newCategory = textBoxNewCategory.Text.Trim();
+            var category = textBoxNewCategory.Text.Trim();
 
-            try
+            if (string.IsNullOrEmpty(category))
             {
-                if (_categories.Split(',').Any(item => item == newCategory))
+                MessageBox.Show(@"Please Enter Category", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (buttonAddCategory.Text == @"Add Category")
+            {
+                var date = DateTime.Now;
+                var id = date.Year.ToString().Substring(2) + "" + date.Month + "" + date.Day + "" + date.Hour + "" + date.Minute + "" + date.Second;
+
+                var newCategory = id + "~" + category;
+
+                var allCategories = string.IsNullOrEmpty(_categories) ? newCategory : _categories + "|" + newCategory;
+
+                try
                 {
-                    MessageBox.Show(@"This category already exist",@"Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    textBoxNewCategory.SelectAll();
-                    textBoxNewCategory.Focus();
-                    return;
+                    GlobalSs.SetValue("Category", allCategories);
+                }
+                catch
+                {
+                    //
                 }
             }
-            catch
+            else if (buttonAddCategory.Text == @"Update")
             {
-                //
-            }
+                if (string.IsNullOrEmpty(_categories)) return;
 
-            if (string.IsNullOrEmpty(_categories))
-            {
-                _categories = newCategory;
-            }
-            else
-            {
-                _categories += "," + newCategory;
-            }
+                var categoryList = _categories.Split('|').ToList();
 
-            GlobalSs.SetValue("Category", _categories);
+                for (int i = 0; i < categoryList.Count; i++)
+                {
+                    var categoryItems = categoryList[i].Split('~');
+
+                    if (categoryItems[0] == textBoxNewCategory.Tag.ToString())
+                    {
+                        categoryItems[1] = category;
+
+                        categoryList[i] = string.Join("~", categoryItems);
+                        break;
+                    }
+                }
+
+                var newList = string.Join("|", categoryList);
+                GlobalSs.SetValue("Category", newList);
+            }
 
             LoadCategory();
 
-            comboBoxCaregory.Text = newCategory;
+            comboBoxCaregory.Text = category;
 
-            buttonCancelCategory.PerformClick();
-        }
-
-        private void buttonCancelCategory_Click(object sender, EventArgs e)
-        {
-            labelNewCategory.Visible = false;
-            textBoxNewCategory.Visible = false;
-            buttonAddCategory.Visible = false;
-            buttonCancelCategory.Visible = false;
-
+            groupBoxCategory.Visible = false;
             groupBoxEvent.Visible = true;
+            pictureBoxAddCategory.Image = Resources.edit_property_64;
+            pictureBoxAddCategory.Tag = null;
         }
-
+        
         private void buttonAddEvent_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(comboBoxCaregory.Text))
@@ -267,7 +314,6 @@ namespace DesktopStickyNote
                 try
                 {
                     GlobalSs.SetValue("Events", allEvents);
-                    LoadEvent();
                 }
                 catch 
                 {
@@ -300,9 +346,9 @@ namespace DesktopStickyNote
 
                 var newList = string.Join("|", events);
                 GlobalSs.SetValue("Events", newList);
-
-                LoadEvent();
             }
+
+            LoadEvent();
 
         }
 
@@ -321,6 +367,8 @@ namespace DesktopStickyNote
                 richTextBoxDetails.Text = lv[0].SubItems[columnHeaderDetails.Index].Text;
                 dateTimePickerFrom.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderFromDateFull.Index].Text);
                 dateTimePickerTo.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderToDateFull.Index].Text);
+
+                groupBoxEvent.Text = @"Update/Delete Event";
             }
         }
 
@@ -335,6 +383,8 @@ namespace DesktopStickyNote
             buttonAddEvent.Text = @"Add Event";
             pictureBoxDeleteEvent.Visible = false;
             buttonCancelEvent.Visible = false;
+
+            groupBoxEvent.Text = @"New Event";
         }
 
         private void pictureBoxDeleteEvent_Click(object sender, EventArgs e)
@@ -357,6 +407,60 @@ namespace DesktopStickyNote
                 GlobalSs.SetValue("Events", newList);
 
                 LoadEvent();
+            }
+            catch
+            {
+                //
+            }
+        }
+
+        private void buttonCancelCategory_Click(object sender, EventArgs e)
+        {
+            buttonDeleteCategory.Visible = false;
+            buttonCancelCategory.Visible = false;
+            textBoxNewCategory.Tag = null;
+            textBoxNewCategory.Clear();
+            textBoxNewCategory.Focus();
+
+            buttonAddCategory.Text = @"Add Category";
+            groupBoxCategory.Text = @"New Category";
+            buttonAddCategory.Text = @"Add Category";
+        }
+
+        private void listViewCategory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var lv = listViewCategory.SelectedItems;
+            if (lv.Count == 1)
+            {
+                buttonAddCategory.Text = @"Update";
+                buttonCancelCategory.Visible = true;
+                buttonDeleteCategory.Visible = true;
+
+                textBoxNewCategory.Tag = lv[0].SubItems[columnHeaderCategoryId.Index].Text;
+                textBoxNewCategory.Text = lv[0].SubItems[columnHeaderCategoryName.Index].Text;
+                
+                groupBoxCategory.Text = @"Update/Delete Category";
+            }
+        }
+
+        private void buttonDeleteCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(_categories)) return;
+
+                var categories = _categories.Split('|').ToList();
+
+                categories.RemoveAll(s =>
+                {
+                    var items = s.Split('~');
+                    return items[0] == textBoxNewCategory.Tag.ToString();
+                });
+
+                var newList = string.Join("|", categories);
+                GlobalSs.SetValue("Category", newList);
+
+                LoadCategory();
             }
             catch
             {

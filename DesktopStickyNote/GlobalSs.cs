@@ -15,6 +15,7 @@ namespace DesktopStickyNote
 
 
         public static string Events { get; set; }
+        public static string Category { get; set; }
 
         public static void SetValue(string keyVariable, string value)
         {
