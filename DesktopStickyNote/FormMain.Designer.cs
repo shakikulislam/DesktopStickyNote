@@ -146,8 +146,8 @@
         private System.Windows.Forms.PictureBox pictureBoxSettings;
         private System.Windows.Forms.ToolTip toolTipMain;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
-        private System.Windows.Forms.Timer timerRemainder;
         private System.Windows.Forms.Label labelTotalEvents;
+        private System.Windows.Forms.Timer timerRemainder;
     }
 }
 

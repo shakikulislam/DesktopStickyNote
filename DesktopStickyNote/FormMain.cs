@@ -17,10 +17,10 @@ namespace DesktopStickyNote
             try
             {
                 bool alwaysVisible;
-                bool.TryParse(GlobalSs.GetValue("AlwaysVisible"), out alwaysVisible);
+                bool.TryParse(GlobalSs.GetValue(GlobalSs.KeyVariable.AlwaysVisible), out alwaysVisible);
                 GlobalSs.AlwaysVisible = alwaysVisible;
 
-                var fontColor = GlobalSs.GetValue("FontColor");
+                var fontColor = GlobalSs.GetValue(GlobalSs.KeyVariable.FontColor);
                 if (fontColor != null)
                 {
                     GlobalSs.FontColor = Color.FromName(fontColor);
@@ -28,9 +28,21 @@ namespace DesktopStickyNote
 
                 ViewSticky(true);
 
-                richTextBoxNote.Text = GlobalSs.GetValue("Note") ?? "";
+                richTextBoxNote.Text = GlobalSs.GetValue(GlobalSs.KeyVariable.Note) ?? "";
 
-                GlobalSs.Events = GlobalSs.GetValue("Events") ?? "";
+                var events = GlobalSs.GetValue(GlobalSs.KeyVariable.Events);
+                GlobalSs.Events = !string.IsNullOrEmpty(events) ? events.Split('|') : null;
+
+                var remainTime = GlobalSs.GetValue(GlobalSs.KeyVariable.RemainTime);
+                if (remainTime!=null)
+                {
+                    var time = remainTime.Split('.');
+                    if (time.Length==2)
+                    {
+                        GlobalSs.RemainTimeHour = int.Parse(time[0]);
+                        GlobalSs.RemainTimeMinutes= int.Parse(time[1]);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -100,7 +112,7 @@ namespace DesktopStickyNote
 
         private void richTextBoxNote_TextChanged(object sender, EventArgs e)
         {
-            GlobalSs.SetValue("Note", richTextBoxNote.Text.Trim());
+            GlobalSs.SetValue(GlobalSs.KeyVariable.Note, richTextBoxNote.Text.Trim());
         }
 
         private void pictureBoxSettings_Click(object sender, EventArgs e)
@@ -110,8 +122,58 @@ namespace DesktopStickyNote
 
         private void timerRemainder_Tick(object sender, EventArgs e)
         {
-            labelTotalEvents.Text = @"Total Events " + GlobalSs.Events.Split('|').Length;
-            labelTotalEvents.Refresh();
+            if (GlobalSs.RemainTimerStop) return;
+
+            if (GlobalSs.Events != null)
+            {
+                labelTotalEvents.Text = @"Total Events " + GlobalSs.Events.Length;
+                labelTotalEvents.Refresh();
+
+                var remainder=new string[0];
+                
+                if (GlobalSs.RemainLaterItems!=null)
+                {
+                    remainder = GlobalSs.RemainLaterItems.Split('|');
+
+                }
+
+                var today = DateTime.Now;
+
+                foreach (var events in GlobalSs.Events)
+                {
+                    var @event = events.Split('~');
+                    var toDate = Convert.ToDateTime(@event[2]);
+                    if (today >= toDate)
+                    {
+                        var showForm = true;
+                        foreach (var item in remainder)
+                        {
+                            var remain = item.Split(',');
+                            var remainTime = Convert.ToDateTime(remain[1]);
+
+                            if (@event[0] != remain[0]) continue;
+
+                            showForm = false;
+
+                            if (today >= remainTime)
+                            {
+                                new FormAlert(@event).ShowDialog();
+                            }
+                        }
+
+                        if (showForm)
+                        {
+                            new FormAlert(@event).ShowDialog();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                labelTotalEvents.Text = @"Total Events 0";
+                labelTotalEvents.Refresh();
+            }
+
         }
 
     }

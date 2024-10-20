@@ -9,12 +9,18 @@ namespace DesktopStickyNote
         private static readonly RegistryKey KeyNote = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Desktop Sticky Note", true);
         private static readonly Font DefaultFont = new Font("Microsoft Sans Serif", 5, FontStyle.Regular);
 
+        public static KeyVariables KeyVariable = new KeyVariables();
+        
         //Settings
         public static bool AlwaysVisible = false;
         public static Color FontColor = Color.Black;
+        public static int RemainTimeHour = 0;
+        public static int RemainTimeMinutes = 5;
+        public static string RemainLaterItems;
+        public static bool RemainTimerStop = false;
 
+        public static string[] Events { get; set; }
 
-        public static string Events { get; set; }
         public static string Category { get; set; }
 
         public static void SetValue(string keyVariable, string value)
@@ -24,15 +30,10 @@ namespace DesktopStickyNote
         
         public static string GetValue(string keyVariable)
         {
-            if (KeyNote != null)
-            {
-                var value = KeyNote.GetValue(keyVariable);
-                if (value != null)
-                {
-                    return value.ToString();
-                }
-            }
-            return null;
+            if (KeyNote == null) return null;
+            var value = KeyNote.GetValue(keyVariable);
+
+            return value != null ? value.ToString() : null;
         }
         
         public static Font GetFont()
@@ -75,6 +76,17 @@ namespace DesktopStickyNote
                 return DefaultFont;
             }
         }
+        
+    }
 
+    public class KeyVariables
+    {
+        public string AlwaysVisible = "AlwaysVisible";
+        public string Category = "Category";
+        public string Font = "Font";
+        public string FontColor = "FontColor";
+        public string Events = "Events";
+        public string Note = "Note";
+        public string RemainTime = "RemainTime";
     }
 }

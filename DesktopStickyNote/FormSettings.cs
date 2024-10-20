@@ -24,21 +24,43 @@ namespace DesktopStickyNote
             labelFontFamily.ForeColor = GlobalSs.FontColor;
             labelFontSize.Text = newFont.Size.ToString("");
             labelFontStyle.Text = newFont.Style.ToString();
+
+            RemainderTimeLoad();
         }
-        
+
+        private void RemainderTimeLoad()
+        {
+            for (var s = 0; s <= 12; s++)
+            {
+                comboBoxRemainderHour.Items.Add(s < 10 ? "0" + s : s.ToString());
+            }
+
+            for (var s = 1; s <= 59; s++)
+            {
+                comboBoxRemainderMunite.Items.Add(s < 10 ? "0" + s : s.ToString());
+            }
+
+            var hour = GlobalSs.RemainTimeHour;
+            var minute = GlobalSs.RemainTimeMinutes;
+            var showHour = hour < 10 ? "0" + hour : hour.ToString();
+            var showMinute = minute < 10 ? "0" + minute : minute.ToString();
+            comboBoxRemainderHour.Text = showHour;
+            comboBoxRemainderMunite.Text = showMinute;
+            labelNewRemainderTime.Text = showHour + @"." + showMinute;
+        }
+
         private void LoadEvent()
         {
             try
             {
-                GlobalSs.Events = GlobalSs.GetValue("Events");
-                _events = GlobalSs.Events;
+                _events = GlobalSs.GetValue(GlobalSs.KeyVariable.Events);
 
                 if (!string.IsNullOrEmpty(_events))
                 {
                     listViewEventList.Items.Clear();
 
-                    var events = _events.Split('|');
-                    foreach (var @event in events)
+                    GlobalSs.Events = _events.Split('|');
+                    foreach (var @event in GlobalSs.Events)
                     {
                         var item = @event.Split('~');
                         
@@ -74,7 +96,7 @@ namespace DesktopStickyNote
         {
             try
             {
-                GlobalSs.Category = GlobalSs.GetValue("Category");
+                GlobalSs.Category = GlobalSs.GetValue(GlobalSs.KeyVariable.Category);
                 _categories = GlobalSs.Category;
 
                 if (!string.IsNullOrEmpty(_categories))
@@ -166,7 +188,7 @@ namespace DesktopStickyNote
 
         private void checkBoxAlwaysVisible_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalSs.SetValue("AlwaysVisible", checkBoxAlwaysVisible.Checked.ToString());
+            GlobalSs.SetValue(GlobalSs.KeyVariable.AlwaysVisible, checkBoxAlwaysVisible.Checked.ToString());
         }
 
         private void buttonSelectFont_Click(object sender, EventArgs e)
@@ -183,12 +205,15 @@ namespace DesktopStickyNote
             {
                 var fontDtl = fontDialog.Font.Name + "," + fontDialog.Font.Size + "," + fontDialog.Font.Style;
 
-                GlobalSs.SetValue("Font", fontDtl);
-                GlobalSs.SetValue("FontColor", fontDialog.Color.Name);
+                GlobalSs.SetValue(GlobalSs.KeyVariable.Font, fontDtl);
+                GlobalSs.SetValue(GlobalSs.KeyVariable.FontColor, fontDialog.Color.Name);
 
                 fontDialog.Dispose();
 
-                Application.Restart();
+                if (MessageBox.Show(@"Restart Application for Change"+Environment.NewLine+@"Press 'Cancel or Close' for Restart Letter", @"Restart", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning)==DialogResult.Yes)
+                {
+                    Application.Restart();
+                }
             }
         }
 
@@ -239,7 +264,7 @@ namespace DesktopStickyNote
 
                 try
                 {
-                    GlobalSs.SetValue("Category", allCategories);
+                    GlobalSs.SetValue(GlobalSs.KeyVariable.Category, allCategories);
                 }
                 catch
                 {
@@ -266,7 +291,7 @@ namespace DesktopStickyNote
                 }
 
                 var newList = string.Join("|", categoryList);
-                GlobalSs.SetValue("Category", newList);
+                GlobalSs.SetValue(GlobalSs.KeyVariable.Category, newList);
             }
 
             LoadCategory();
@@ -313,7 +338,7 @@ namespace DesktopStickyNote
 
                 try
                 {
-                    GlobalSs.SetValue("Events", allEvents);
+                    GlobalSs.SetValue(GlobalSs.KeyVariable.Events, allEvents);
                 }
                 catch 
                 {
@@ -345,7 +370,7 @@ namespace DesktopStickyNote
                 }
 
                 var newList = string.Join("|", events);
-                GlobalSs.SetValue("Events", newList);
+                GlobalSs.SetValue(GlobalSs.KeyVariable.Events, newList);
             }
 
             LoadEvent();
@@ -404,7 +429,7 @@ namespace DesktopStickyNote
 
                 // Join the updated list back into a single string
                 var newList = string.Join("|", events);
-                GlobalSs.SetValue("Events", newList);
+                GlobalSs.SetValue(GlobalSs.KeyVariable.Events, newList);
 
                 LoadEvent();
             }
@@ -458,7 +483,7 @@ namespace DesktopStickyNote
                 });
 
                 var newList = string.Join("|", categories);
-                GlobalSs.SetValue("Category", newList);
+                GlobalSs.SetValue(GlobalSs.KeyVariable.Category, newList);
 
                 LoadCategory();
             }
@@ -468,6 +493,18 @@ namespace DesktopStickyNote
             }
         }
 
+        private void buttonRemainderUpdate_Click(object sender, EventArgs e)
+        {
+            GlobalSs.SetValue(GlobalSs.KeyVariable.RemainTime,labelNewRemainderTime.Text);
+            GlobalSs.RemainTimeHour = int.Parse(comboBoxRemainderHour.Text);
+            GlobalSs.RemainTimeMinutes = int.Parse(comboBoxRemainderMunite.Text);
 
+            MessageBox.Show(@"Remaining Time Updated", @"Confirmation", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+
+        private void comboBoxRemainderHour_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            labelNewRemainderTime.Text = comboBoxRemainderHour.Text + @"." + comboBoxRemainderMunite.Text;
+        }
     }
 }

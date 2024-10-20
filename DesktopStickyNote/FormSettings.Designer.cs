@@ -29,10 +29,17 @@
         private void InitializeComponent()
         {
             this.panelSideMenu = new System.Windows.Forms.Panel();
-            this.buttonFont = new System.Windows.Forms.Button();
             this.buttonReminder = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelSetting = new System.Windows.Forms.Panel();
+            this.groupBoxRemainderTime = new System.Windows.Forms.GroupBox();
+            this.buttonRemainderUpdate = new System.Windows.Forms.Button();
+            this.labelNewRemainderTime = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBoxRemainderMunite = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxRemainderHour = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.labelFontSize = new System.Windows.Forms.Label();
@@ -64,6 +71,7 @@
             this.columnHeaderFromDateFull = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderToDateFull = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxEvent = new System.Windows.Forms.GroupBox();
+            this.pictureBoxDeleteEvent = new System.Windows.Forms.PictureBox();
             this.buttonCancelEvent = new System.Windows.Forms.Button();
             this.buttonAddEvent = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -72,27 +80,26 @@
             this.label9 = new System.Windows.Forms.Label();
             this.richTextBoxDetails = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.pictureBoxAddCategory = new System.Windows.Forms.PictureBox();
             this.comboBoxCaregory = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelRemainder = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.pictureBoxDeleteEvent = new System.Windows.Forms.PictureBox();
-            this.pictureBoxAddCategory = new System.Windows.Forms.PictureBox();
             this.panelSideMenu.SuspendLayout();
             this.panelSetting.SuspendLayout();
+            this.groupBoxRemainderTime.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelReminder.SuspendLayout();
             this.groupBoxCategory.SuspendLayout();
             this.groupBoxEvent.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteEvent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddCategory)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSideMenu
             // 
             this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.panelSideMenu.Controls.Add(this.buttonFont);
             this.panelSideMenu.Controls.Add(this.buttonReminder);
             this.panelSideMenu.Controls.Add(this.buttonSettings);
             this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -100,21 +107,6 @@
             this.panelSideMenu.Name = "panelSideMenu";
             this.panelSideMenu.Size = new System.Drawing.Size(133, 434);
             this.panelSideMenu.TabIndex = 5;
-            // 
-            // buttonFont
-            // 
-            this.buttonFont.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonFont.FlatAppearance.BorderSize = 0;
-            this.buttonFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFont.ForeColor = System.Drawing.Color.White;
-            this.buttonFont.Location = new System.Drawing.Point(0, 84);
-            this.buttonFont.Name = "buttonFont";
-            this.buttonFont.Size = new System.Drawing.Size(133, 42);
-            this.buttonFont.TabIndex = 2;
-            this.buttonFont.Text = "22";
-            this.buttonFont.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonFont.UseVisualStyleBackColor = true;
             // 
             // buttonReminder
             // 
@@ -151,6 +143,7 @@
             // panelSetting
             // 
             this.panelSetting.BackColor = System.Drawing.Color.White;
+            this.panelSetting.Controls.Add(this.groupBoxRemainderTime);
             this.panelSetting.Controls.Add(this.panel1);
             this.panelSetting.Controls.Add(this.labelFontSize);
             this.panelSetting.Controls.Add(this.labelFontStyle);
@@ -163,11 +156,107 @@
             this.panelSetting.Controls.Add(this.label1);
             this.panelSetting.Controls.Add(this.checkBoxAlwaysVisible);
             this.panelSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelSetting.Location = new System.Drawing.Point(360, 12);
+            this.panelSetting.Location = new System.Drawing.Point(150, 8);
             this.panelSetting.Name = "panelSetting";
-            this.panelSetting.Size = new System.Drawing.Size(155, 33);
+            this.panelSetting.Size = new System.Drawing.Size(365, 290);
             this.panelSetting.TabIndex = 1;
             this.panelSetting.Visible = false;
+            // 
+            // groupBoxRemainderTime
+            // 
+            this.groupBoxRemainderTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxRemainderTime.Controls.Add(this.buttonRemainderUpdate);
+            this.groupBoxRemainderTime.Controls.Add(this.labelNewRemainderTime);
+            this.groupBoxRemainderTime.Controls.Add(this.label12);
+            this.groupBoxRemainderTime.Controls.Add(this.label11);
+            this.groupBoxRemainderTime.Controls.Add(this.comboBoxRemainderMunite);
+            this.groupBoxRemainderTime.Controls.Add(this.label7);
+            this.groupBoxRemainderTime.Controls.Add(this.comboBoxRemainderHour);
+            this.groupBoxRemainderTime.Location = new System.Drawing.Point(9, 59);
+            this.groupBoxRemainderTime.Name = "groupBoxRemainderTime";
+            this.groupBoxRemainderTime.Size = new System.Drawing.Size(347, 81);
+            this.groupBoxRemainderTime.TabIndex = 14;
+            this.groupBoxRemainderTime.TabStop = false;
+            this.groupBoxRemainderTime.Text = "Remainder Time";
+            // 
+            // buttonRemainderUpdate
+            // 
+            this.buttonRemainderUpdate.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.buttonRemainderUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemainderUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRemainderUpdate.ForeColor = System.Drawing.Color.Green;
+            this.buttonRemainderUpdate.Location = new System.Drawing.Point(264, 26);
+            this.buttonRemainderUpdate.Name = "buttonRemainderUpdate";
+            this.buttonRemainderUpdate.Size = new System.Drawing.Size(69, 42);
+            this.buttonRemainderUpdate.TabIndex = 15;
+            this.buttonRemainderUpdate.Text = "Update";
+            this.buttonRemainderUpdate.UseVisualStyleBackColor = true;
+            this.buttonRemainderUpdate.Click += new System.EventHandler(this.buttonRemainderUpdate_Click);
+            // 
+            // labelNewRemainderTime
+            // 
+            this.labelNewRemainderTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewRemainderTime.ForeColor = System.Drawing.Color.Green;
+            this.labelNewRemainderTime.Location = new System.Drawing.Point(182, 48);
+            this.labelNewRemainderTime.Name = "labelNewRemainderTime";
+            this.labelNewRemainderTime.Size = new System.Drawing.Size(82, 20);
+            this.labelNewRemainderTime.TabIndex = 17;
+            this.labelNewRemainderTime.Text = "00.00";
+            this.labelNewRemainderTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(188, 26);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(70, 17);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "New Time";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(110, 26);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(50, 17);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Minute";
+            // 
+            // comboBoxRemainderMunite
+            // 
+            this.comboBoxRemainderMunite.DropDownHeight = 150;
+            this.comboBoxRemainderMunite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRemainderMunite.FormattingEnabled = true;
+            this.comboBoxRemainderMunite.IntegralHeight = false;
+            this.comboBoxRemainderMunite.ItemHeight = 16;
+            this.comboBoxRemainderMunite.Location = new System.Drawing.Point(92, 46);
+            this.comboBoxRemainderMunite.Name = "comboBoxRemainderMunite";
+            this.comboBoxRemainderMunite.Size = new System.Drawing.Size(87, 24);
+            this.comboBoxRemainderMunite.TabIndex = 15;
+            this.comboBoxRemainderMunite.SelectedIndexChanged += new System.EventHandler(this.comboBoxRemainderHour_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(41, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 17);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Hour";
+            // 
+            // comboBoxRemainderHour
+            // 
+            this.comboBoxRemainderHour.DropDownHeight = 150;
+            this.comboBoxRemainderHour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRemainderHour.FormattingEnabled = true;
+            this.comboBoxRemainderHour.IntegralHeight = false;
+            this.comboBoxRemainderHour.ItemHeight = 16;
+            this.comboBoxRemainderHour.Location = new System.Drawing.Point(28, 46);
+            this.comboBoxRemainderHour.Name = "comboBoxRemainderHour";
+            this.comboBoxRemainderHour.Size = new System.Drawing.Size(65, 24);
+            this.comboBoxRemainderHour.TabIndex = 13;
+            this.comboBoxRemainderHour.SelectedIndexChanged += new System.EventHandler(this.comboBoxRemainderHour_SelectedIndexChanged);
             // 
             // panel1
             // 
@@ -175,7 +264,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(155, 26);
+            this.panel1.Size = new System.Drawing.Size(365, 26);
             this.panel1.TabIndex = 11;
             // 
             // label6
@@ -183,7 +272,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(86, 5);
+            this.label6.Location = new System.Drawing.Point(296, 5);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 16);
             this.label6.TabIndex = 10;
@@ -192,7 +281,7 @@
             // labelFontSize
             // 
             this.labelFontSize.AutoSize = true;
-            this.labelFontSize.Location = new System.Drawing.Point(171, 120);
+            this.labelFontSize.Location = new System.Drawing.Point(171, 198);
             this.labelFontSize.Name = "labelFontSize";
             this.labelFontSize.Size = new System.Drawing.Size(16, 17);
             this.labelFontSize.TabIndex = 6;
@@ -201,7 +290,7 @@
             // labelFontStyle
             // 
             this.labelFontStyle.AutoSize = true;
-            this.labelFontStyle.Location = new System.Drawing.Point(171, 97);
+            this.labelFontStyle.Location = new System.Drawing.Point(171, 175);
             this.labelFontStyle.Name = "labelFontStyle";
             this.labelFontStyle.Size = new System.Drawing.Size(16, 17);
             this.labelFontStyle.TabIndex = 5;
@@ -210,7 +299,7 @@
             // labelFontFamily
             // 
             this.labelFontFamily.AutoSize = true;
-            this.labelFontFamily.Location = new System.Drawing.Point(171, 74);
+            this.labelFontFamily.Location = new System.Drawing.Point(171, 152);
             this.labelFontFamily.Name = "labelFontFamily";
             this.labelFontFamily.Size = new System.Drawing.Size(16, 17);
             this.labelFontFamily.TabIndex = 4;
@@ -219,7 +308,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(127, 120);
+            this.label3.Location = new System.Drawing.Point(127, 198);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 17);
             this.label3.TabIndex = 9;
@@ -228,7 +317,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(91, 97);
+            this.label4.Location = new System.Drawing.Point(91, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 17);
             this.label4.TabIndex = 8;
@@ -237,7 +326,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(82, 74);
+            this.label5.Location = new System.Drawing.Point(82, 152);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 17);
             this.label5.TabIndex = 7;
@@ -245,7 +334,7 @@
             // 
             // buttonSelectFont
             // 
-            this.buttonSelectFont.Location = new System.Drawing.Point(114, 147);
+            this.buttonSelectFont.Location = new System.Drawing.Point(114, 225);
             this.buttonSelectFont.Name = "buttonSelectFont";
             this.buttonSelectFont.Size = new System.Drawing.Size(127, 28);
             this.buttonSelectFont.TabIndex = 3;
@@ -256,7 +345,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 74);
+            this.label2.Location = new System.Drawing.Point(7, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 17);
             this.label2.TabIndex = 2;
@@ -302,9 +391,9 @@
             this.panelReminder.Controls.Add(this.panel2);
             this.panelReminder.Controls.Add(this.label15);
             this.panelReminder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelReminder.Location = new System.Drawing.Point(150, 12);
+            this.panelReminder.Location = new System.Drawing.Point(150, 398);
             this.panelReminder.Name = "panelReminder";
-            this.panelReminder.Size = new System.Drawing.Size(370, 413);
+            this.panelReminder.Size = new System.Drawing.Size(370, 27);
             this.panelReminder.TabIndex = 11;
             this.panelReminder.Visible = false;
             // 
@@ -320,7 +409,7 @@
             this.groupBoxCategory.Controls.Add(this.buttonAddCategory);
             this.groupBoxCategory.Location = new System.Drawing.Point(10, 70);
             this.groupBoxCategory.Name = "groupBoxCategory";
-            this.groupBoxCategory.Size = new System.Drawing.Size(350, 148);
+            this.groupBoxCategory.Size = new System.Drawing.Size(350, 24);
             this.groupBoxCategory.TabIndex = 21;
             this.groupBoxCategory.TabStop = false;
             this.groupBoxCategory.Text = "New Category";
@@ -340,7 +429,7 @@
             this.listViewCategory.Location = new System.Drawing.Point(6, 81);
             this.listViewCategory.MultiSelect = false;
             this.listViewCategory.Name = "listViewCategory";
-            this.listViewCategory.Size = new System.Drawing.Size(338, 61);
+            this.listViewCategory.Size = new System.Drawing.Size(338, 0);
             this.listViewCategory.TabIndex = 21;
             this.listViewCategory.UseCompatibleStateImageBehavior = false;
             this.listViewCategory.View = System.Windows.Forms.View.Details;
@@ -419,7 +508,7 @@
             this.listViewEventList.Location = new System.Drawing.Point(10, 256);
             this.listViewEventList.MultiSelect = false;
             this.listViewEventList.Name = "listViewEventList";
-            this.listViewEventList.Size = new System.Drawing.Size(351, 148);
+            this.listViewEventList.Size = new System.Drawing.Size(351, 2);
             this.listViewEventList.TabIndex = 20;
             this.listViewEventList.UseCompatibleStateImageBehavior = false;
             this.listViewEventList.View = System.Windows.Forms.View.Details;
@@ -473,12 +562,24 @@
             this.groupBoxEvent.Controls.Add(this.label9);
             this.groupBoxEvent.Controls.Add(this.richTextBoxDetails);
             this.groupBoxEvent.Controls.Add(this.label8);
-            this.groupBoxEvent.Location = new System.Drawing.Point(10, 224);
+            this.groupBoxEvent.Location = new System.Drawing.Point(10, 70);
             this.groupBoxEvent.Name = "groupBoxEvent";
-            this.groupBoxEvent.Size = new System.Drawing.Size(350, 26);
+            this.groupBoxEvent.Size = new System.Drawing.Size(350, 180);
             this.groupBoxEvent.TabIndex = 18;
             this.groupBoxEvent.TabStop = false;
             this.groupBoxEvent.Text = "New Event";
+            // 
+            // pictureBoxDeleteEvent
+            // 
+            this.pictureBoxDeleteEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxDeleteEvent.Image = global::DesktopStickyNote.Properties.Resources.trash_64;
+            this.pictureBoxDeleteEvent.Location = new System.Drawing.Point(241, 140);
+            this.pictureBoxDeleteEvent.Name = "pictureBoxDeleteEvent";
+            this.pictureBoxDeleteEvent.Size = new System.Drawing.Size(31, 24);
+            this.pictureBoxDeleteEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDeleteEvent.TabIndex = 25;
+            this.pictureBoxDeleteEvent.TabStop = false;
+            this.pictureBoxDeleteEvent.Click += new System.EventHandler(this.pictureBoxDeleteEvent_Click);
             // 
             // buttonCancelEvent
             // 
@@ -560,6 +661,18 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "Details";
             // 
+            // pictureBoxAddCategory
+            // 
+            this.pictureBoxAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxAddCategory.Image = global::DesktopStickyNote.Properties.Resources.edit_property_64;
+            this.pictureBoxAddCategory.Location = new System.Drawing.Point(332, 30);
+            this.pictureBoxAddCategory.Name = "pictureBoxAddCategory";
+            this.pictureBoxAddCategory.Size = new System.Drawing.Size(30, 30);
+            this.pictureBoxAddCategory.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxAddCategory.TabIndex = 15;
+            this.pictureBoxAddCategory.TabStop = false;
+            this.pictureBoxAddCategory.Click += new System.EventHandler(this.pictureBoxAddCategory_Click);
+            // 
             // comboBoxCaregory
             // 
             this.comboBoxCaregory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -600,30 +713,6 @@
             this.label15.TabIndex = 1;
             this.label15.Text = "Category";
             // 
-            // pictureBoxDeleteEvent
-            // 
-            this.pictureBoxDeleteEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxDeleteEvent.Image = global::DesktopStickyNote.Properties.Resources.trash_64;
-            this.pictureBoxDeleteEvent.Location = new System.Drawing.Point(241, 140);
-            this.pictureBoxDeleteEvent.Name = "pictureBoxDeleteEvent";
-            this.pictureBoxDeleteEvent.Size = new System.Drawing.Size(31, 24);
-            this.pictureBoxDeleteEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxDeleteEvent.TabIndex = 25;
-            this.pictureBoxDeleteEvent.TabStop = false;
-            this.pictureBoxDeleteEvent.Click += new System.EventHandler(this.pictureBoxDeleteEvent_Click);
-            // 
-            // pictureBoxAddCategory
-            // 
-            this.pictureBoxAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxAddCategory.Image = global::DesktopStickyNote.Properties.Resources.edit_property_64;
-            this.pictureBoxAddCategory.Location = new System.Drawing.Point(332, 30);
-            this.pictureBoxAddCategory.Name = "pictureBoxAddCategory";
-            this.pictureBoxAddCategory.Size = new System.Drawing.Size(30, 30);
-            this.pictureBoxAddCategory.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxAddCategory.TabIndex = 15;
-            this.pictureBoxAddCategory.TabStop = false;
-            this.pictureBoxAddCategory.Click += new System.EventHandler(this.pictureBoxAddCategory_Click);
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,6 +732,8 @@
             this.panelSideMenu.ResumeLayout(false);
             this.panelSetting.ResumeLayout(false);
             this.panelSetting.PerformLayout();
+            this.groupBoxRemainderTime.ResumeLayout(false);
+            this.groupBoxRemainderTime.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelReminder.ResumeLayout(false);
@@ -651,10 +742,10 @@
             this.groupBoxCategory.PerformLayout();
             this.groupBoxEvent.ResumeLayout(false);
             this.groupBoxEvent.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteEvent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddCategory)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -665,7 +756,6 @@
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonReminder;
         private System.Windows.Forms.Panel panelTopBar;
-        private System.Windows.Forms.Button buttonFont;
         private System.Windows.Forms.CheckBox checkBoxAlwaysVisible;
         private System.Windows.Forms.Button buttonSelectFont;
         private System.Windows.Forms.Label label2;
@@ -711,6 +801,14 @@
         private System.Windows.Forms.ListView listViewCategory;
         private System.Windows.Forms.ColumnHeader columnHeaderCategoryId;
         private System.Windows.Forms.ColumnHeader columnHeaderCategoryName;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBoxRemainderTime;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBoxRemainderMunite;
+        private System.Windows.Forms.ComboBox comboBoxRemainderHour;
+        private System.Windows.Forms.Label labelNewRemainderTime;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button buttonRemainderUpdate;
 
     }
 }
