@@ -17,7 +17,7 @@ namespace DesktopStickyNote
         {
             InitializeComponent();
             LoadSettings();
-
+            
             var newFont = GlobalSs.GetFont();
 
             labelFontFamily.Text = newFont.Name;
@@ -74,6 +74,11 @@ namespace DesktopStickyNote
 
                         listViewEventList.Items.Add(lvi);
                     }
+                }
+                else
+                {
+                    listViewEventList.Items.Clear();
+                    GlobalSs.Events = new string[0];
                 }
 
                 listViewEventList.Refresh();
@@ -416,6 +421,26 @@ namespace DesktopStickyNote
         {
             try
             {
+                if (MessageBox.Show(@"Are you sure! Remove this EVENT", @"Confirmation", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information) != DialogResult.Yes) return;
+
+                // Remove Remain Later Item
+                var remainder = GlobalSs.RemainLaterItems;
+
+                if (remainder!=null)
+                {
+                    var remainderList = remainder.Split('|').ToList();
+                    remainderList.RemoveAll(s =>
+                    {
+                        var remainRemoveItem = s.Split(',');
+                        return remainRemoveItem[0] == labelRemainder.Tag.ToString();
+                    });
+
+                    var newRemainList = string.Join("|", remainderList);
+                    GlobalSs.RemainLaterItems = newRemainList;
+                }
+
+                // Remove Event From Store
                 if (string.IsNullOrEmpty(_events)) return;
 
                 var events = _events.Split('|').ToList();

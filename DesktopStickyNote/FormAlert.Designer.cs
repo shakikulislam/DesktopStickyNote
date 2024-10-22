@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlert));
             this.panelBarLeft = new System.Windows.Forms.Panel();
             this.panelBarRight = new System.Windows.Forms.Panel();
             this.panelBarButtom = new System.Windows.Forms.Panel();
@@ -91,6 +92,9 @@
             this.labelCategory.Size = new System.Drawing.Size(366, 49);
             this.labelCategory.TabIndex = 7;
             this.labelCategory.Text = "Category";
+            this.labelCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCategory_MouseDown);
+            this.labelCategory.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelCategory_MouseMove);
+            this.labelCategory.MouseUp += new System.Windows.Forms.MouseEventHandler(this.labelCategory_MouseUp);
             // 
             // pictureBox1
             // 
@@ -210,6 +214,7 @@
             this.Controls.Add(this.panelBarLeft);
             this.Controls.Add(this.labelRemainAfter);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAlert";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

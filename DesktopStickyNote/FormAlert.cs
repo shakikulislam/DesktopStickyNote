@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -7,6 +8,9 @@ namespace DesktopStickyNote
     public partial class FormAlert : Form
     {
         private string _id;
+        private bool _isMouseDown;
+        private Point _lastMouseLocation;
+
         public FormAlert(string[] singleEvent)
         {
             InitializeComponent();
@@ -83,16 +87,20 @@ namespace DesktopStickyNote
                     MessageBoxIcon.Information) != DialogResult.Yes) return;
 
             // Remove Remain Later Item
-            var remainderList = GlobalSs.RemainLaterItems.Split('|').ToList();
+            var remainder = GlobalSs.RemainLaterItems;
 
-            remainderList.RemoveAll(s =>
+            if (remainder != null)
             {
-                var remainRemoveItem = s.Split(',');
-                return remainRemoveItem[0] == _id;
-            });
+                var remainderList = remainder.Split('|').ToList();
+                remainderList.RemoveAll(s =>
+                {
+                    var remainRemoveItem = s.Split(',');
+                    return remainRemoveItem[0] == _id;
+                });
 
-            var newRemainList = string.Join("|", remainderList);
-            GlobalSs.RemainLaterItems = newRemainList;
+                var newRemainList = string.Join("|", remainderList);
+                GlobalSs.RemainLaterItems = newRemainList;
+            }
 
             // Remove Event From Store
             var eventList = GlobalSs.Events.ToList();
@@ -111,6 +119,27 @@ namespace DesktopStickyNote
 
             GlobalSs.RemainTimerStop = false;
             Close();
+        }
+
+        private void labelCategory_MouseDown(object sender, MouseEventArgs e)
+        {
+            _isMouseDown = true;
+            _lastMouseLocation = e.Location;
+        }
+
+        private void labelCategory_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isMouseDown)
+            {
+                int x = e.X - _lastMouseLocation.X;
+                int y = e.Y - _lastMouseLocation.Y;
+                Location = new Point(Location.X + x, Location.Y + y);
+            }
+        }
+
+        private void labelCategory_MouseUp(object sender, MouseEventArgs e)
+        {
+            _isMouseDown = false;
         }
     }
 }

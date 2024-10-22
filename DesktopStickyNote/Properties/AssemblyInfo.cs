@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Desktop Sticky Note")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This Application is a Sticky Note and Remainder")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MD SHAKIKUL ISLAM")]
 [assembly: AssemblyProduct("DesktopStickyNote")]

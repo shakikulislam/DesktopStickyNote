@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.panelSideMenu = new System.Windows.Forms.Panel();
             this.buttonReminder = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
@@ -158,7 +159,7 @@
             this.panelSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelSetting.Location = new System.Drawing.Point(150, 8);
             this.panelSetting.Name = "panelSetting";
-            this.panelSetting.Size = new System.Drawing.Size(365, 290);
+            this.panelSetting.Size = new System.Drawing.Size(365, 26);
             this.panelSetting.TabIndex = 1;
             this.panelSetting.Visible = false;
             // 
@@ -391,9 +392,9 @@
             this.panelReminder.Controls.Add(this.panel2);
             this.panelReminder.Controls.Add(this.label15);
             this.panelReminder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelReminder.Location = new System.Drawing.Point(150, 398);
+            this.panelReminder.Location = new System.Drawing.Point(150, 45);
             this.panelReminder.Name = "panelReminder";
-            this.panelReminder.Size = new System.Drawing.Size(370, 27);
+            this.panelReminder.Size = new System.Drawing.Size(370, 380);
             this.panelReminder.TabIndex = 11;
             this.panelReminder.Visible = false;
             // 
@@ -508,7 +509,7 @@
             this.listViewEventList.Location = new System.Drawing.Point(10, 256);
             this.listViewEventList.MultiSelect = false;
             this.listViewEventList.Name = "listViewEventList";
-            this.listViewEventList.Size = new System.Drawing.Size(351, 2);
+            this.listViewEventList.Size = new System.Drawing.Size(351, 355);
             this.listViewEventList.TabIndex = 20;
             this.listViewEventList.UseCompatibleStateImageBehavior = false;
             this.listViewEventList.View = System.Windows.Forms.View.Details;
@@ -724,6 +725,7 @@
             this.Controls.Add(this.panelSideMenu);
             this.Controls.Add(this.panelTopBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSettings";
