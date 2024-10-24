@@ -18,6 +18,20 @@ namespace DesktopStickyNote
         public static int RemainTimeMinutes = 5;
         public static string RemainLaterItems;
         public static bool RemainTimerStop = false;
+        public static Position CurrentPosition = Position.RightMiddle;
+
+        public enum Position
+        {
+            LeftBottom = 1,
+            LeftMiddle = 2,
+            LeftTop = 3,
+            TopLeft = 4,
+            TopMiddle = 5,
+            TopRight = 6,
+            RightTop = 7,
+            RightMiddle = 8,
+            RightBottom = 9
+        }
 
         public static string[] Events { get; set; }
 
@@ -88,5 +102,6 @@ namespace DesktopStickyNote
         public string Events = "Events";
         public string Note = "Note";
         public string RemainTime = "RemainTime";
+        public string Position = "Position";
     }
 }

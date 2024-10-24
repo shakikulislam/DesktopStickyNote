@@ -8,7 +8,12 @@ namespace DesktopStickyNote
     {
         private int _dWidth;
         private int _dHeight;
-        private int _rightCenter;
+        private int _formLocationX;
+        private int _formLocationY;
+        private int _formHeightDefault = 250;
+        private int _formWidthDefault = 220;
+        private int _formHeight;
+        private int _formWidth;
 
         public FormMain()
         {
@@ -25,22 +30,30 @@ namespace DesktopStickyNote
                 {
                     GlobalSs.FontColor = Color.FromName(fontColor);
                 }
-
-                ViewSticky(true);
-
+                
                 richTextBoxNote.Text = GlobalSs.GetValue(GlobalSs.KeyVariable.Note) ?? "";
 
                 var events = GlobalSs.GetValue(GlobalSs.KeyVariable.Events);
                 GlobalSs.Events = !string.IsNullOrEmpty(events) ? events.Split('|') : null;
 
                 var remainTime = GlobalSs.GetValue(GlobalSs.KeyVariable.RemainTime);
-                if (remainTime!=null)
+                if (remainTime != null)
                 {
                     var time = remainTime.Split('.');
-                    if (time.Length==2)
+                    if (time.Length == 2)
                     {
                         GlobalSs.RemainTimeHour = int.Parse(time[0]);
-                        GlobalSs.RemainTimeMinutes= int.Parse(time[1]);
+                        GlobalSs.RemainTimeMinutes = int.Parse(time[1]);
+                    }
+                }
+
+                var position = GlobalSs.GetValue(GlobalSs.KeyVariable.Position);
+                if (position != null)
+                {
+                    var positionCode = int.Parse(position);
+                    if (positionCode >= 1 && positionCode <= 9)
+                    {
+                        GlobalSs.CurrentPosition = (GlobalSs.Position) positionCode;
                     }
                 }
             }
@@ -51,6 +64,9 @@ namespace DesktopStickyNote
 
             richTextBoxNote.Font = GlobalSs.GetFont();
             richTextBoxNote.ForeColor = GlobalSs.FontColor;
+
+
+            ViewSticky(true);
         }
 
         private void ViewSticky(bool loadTime = false, bool mouseHover = false)
@@ -59,18 +75,67 @@ namespace DesktopStickyNote
             {
                 _dHeight = Screen.GetWorkingArea(this).Height;
                 _dWidth = Screen.GetWorkingArea(this).Width;
-                this.Height = _dHeight - 150;
-                _rightCenter = (_dHeight / 2) - (this.Height / 2);
 
-                if (GlobalSs.AlwaysVisible)
+                switch (GlobalSs.CurrentPosition)
                 {
-                    this.Location = new Point(_dWidth - this.Width, _rightCenter);
+                    case GlobalSs.Position.LeftBottom:
+                        _formWidth = _formWidthDefault;
+                        _formHeight = _dHeight - 150;
+                        _formLocationX = GlobalSs.AlwaysVisible ? 0 : -_formWidth + 1;
+                        _formLocationY = _dHeight - _formHeight;
+                        break;
+                    case GlobalSs.Position.LeftMiddle:
+                        _formWidth = _formWidthDefault;
+                        _formHeight = _dHeight - 150;
+                        _formLocationX = GlobalSs.AlwaysVisible ? 0 : -_formWidth + 1;
+                        _formLocationY = (_dHeight / 2) - (_formHeight / 2);
+                        break;
+                    case GlobalSs.Position.LeftTop:
+                        _formWidth = _formWidthDefault;
+                        _formHeight = _dHeight - 150;
+                        _formLocationX = GlobalSs.AlwaysVisible ? 0 : -_formWidth + 1;
+                        _formLocationY = 0;
+                        break;
+                    case GlobalSs.Position.TopLeft:
+                        _formWidth = _dWidth - 500;
+                        _formHeight = _formHeightDefault;
+                        _formLocationX = 0;
+                        _formLocationY = GlobalSs.AlwaysVisible ? 0 : -_formHeight + 1;
+                        break;
+                    case GlobalSs.Position.TopMiddle:
+                        _formWidth = _dWidth - 500;
+                        _formHeight = _formHeightDefault;
+                        _formLocationX = (_dWidth / 2) - (_formWidth / 2);
+                        _formLocationY = GlobalSs.AlwaysVisible ? 0 : -_formHeight + 1;
+                        break;
+                    case GlobalSs.Position.TopRight:
+                        _formWidth = _dWidth - 500;
+                        _formHeight = _formHeightDefault;
+                        _formLocationX = _dWidth - _formWidth;
+                        _formLocationY = GlobalSs.AlwaysVisible ? 0 : -_formHeight + 1;
+                        break;
+                    case GlobalSs.Position.RightTop:
+                        _formWidth = _formWidthDefault;
+                        _formHeight = _dHeight - 150;
+                        _formLocationX = GlobalSs.AlwaysVisible ? _dWidth - _formWidth : _dWidth - 1;
+                        _formLocationY = 0;
+                        break;
+                    case GlobalSs.Position.RightMiddle:
+                        _formWidth = _formWidthDefault;
+                        _formHeight = _dHeight - 150;
+                        _formLocationX = GlobalSs.AlwaysVisible ? _dWidth - _formWidth : _dWidth - 1;
+                        _formLocationY = (_dHeight / 2) - (_formHeight / 2);
+                        break;
+                    case GlobalSs.Position.RightBottom:
+                        _formWidth = _formWidthDefault;
+                        _formHeight = _dHeight - 150;
+                        _formLocationX = GlobalSs.AlwaysVisible ? _dWidth - _formWidth : _dWidth - 1;
+                        _formLocationY = _dHeight - _formHeight;
+                        break;
                 }
-                else
-                {
-                    this.Location = new Point(_dWidth - 1, _rightCenter);
-                }
-                
+
+                this.Width = _formWidth;
+                this.Height = _formHeight;
             }
             else
             {
@@ -78,7 +143,24 @@ namespace DesktopStickyNote
                 {
                     if (!GlobalSs.AlwaysVisible)
                     {
-                        this.Location = new Point(_dWidth - this.Width, _rightCenter);
+                        switch (GlobalSs.CurrentPosition)
+                        {
+                            case GlobalSs.Position.LeftBottom:
+                            case GlobalSs.Position.LeftMiddle:
+                            case GlobalSs.Position.LeftTop:
+                                _formLocationX = 0;
+                                break;
+                            case GlobalSs.Position.TopLeft:
+                            case GlobalSs.Position.TopMiddle:
+                            case GlobalSs.Position.TopRight:
+                                _formLocationY = 0;
+                                break;
+                            case GlobalSs.Position.RightTop:
+                            case GlobalSs.Position.RightMiddle:
+                            case GlobalSs.Position.RightBottom:
+                                _formLocationX = _dWidth - _formWidth;
+                                break;
+                        }
                     }
                 }
                 else
@@ -88,18 +170,49 @@ namespace DesktopStickyNote
                         var mousePositionX = MousePosition.X;
                         var mousePositionY = MousePosition.Y;
 
-                        if (mousePositionX <= this.Location.X || mousePositionY >= (this.Location.Y + this.Height) ||
-                            mousePositionY <= this.Location.Y)
+                        switch (GlobalSs.CurrentPosition)
                         {
-                            this.Location = new Point(_dWidth - 1, _rightCenter);
+                            case GlobalSs.Position.LeftBottom:
+                            case GlobalSs.Position.LeftMiddle:
+                            case GlobalSs.Position.LeftTop:
+                                if (mousePositionX >= (this.Location.X + _formWidth) ||
+                                    mousePositionY >= (this.Location.Y + _formHeight) ||
+                                    mousePositionY <= this.Location.Y)
+                                {
+                                    _formLocationX = -_formWidth + 1;
+                                }
+
+                                break;
+                            case GlobalSs.Position.TopLeft:
+                            case GlobalSs.Position.TopMiddle:
+                            case GlobalSs.Position.TopRight:
+                                if (mousePositionX <= this.Location.X ||
+                                    mousePositionY >= (this.Location.Y + _formHeight) ||
+                                    mousePositionX >= (this.Location.X + _formWidth))
+                                {
+                                    _formLocationY = -_formHeight + 1;
+                                }
+
+                                break;
+                            case GlobalSs.Position.RightTop:
+                            case GlobalSs.Position.RightMiddle:
+                            case GlobalSs.Position.RightBottom:
+                                if (mousePositionX <= this.Location.X ||
+                                    mousePositionY >= (this.Location.Y + _formHeight) ||
+                                    mousePositionY <= this.Location.Y)
+                                {
+                                    _formLocationX = _dWidth - 1;
+                                }
+
+                                break;
                         }
                     }
                 }
-
             }
 
+            this.Location = new Point(_formLocationX, _formLocationY);
         }
-        
+
         private void FormMain_MouseHover(object sender, EventArgs e)
         {
             ViewSticky(false, true);

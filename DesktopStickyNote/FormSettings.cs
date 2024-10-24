@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using DesktopStickyNote.Properties;
 using DesktopStickyNote.Theme;
@@ -26,6 +28,20 @@ namespace DesktopStickyNote
             labelFontStyle.Text = newFont.Style.ToString();
 
             RemainderTimeLoad();
+        }
+
+        private string PositionNameFormat(string name)
+        {
+            var stringBuilder = new StringBuilder();
+            for (var i = 0; i < name.Length; i++)
+            {
+                if (i > 0 && char.IsUpper(name[i]))
+                {
+                    stringBuilder.Append(' ');
+                }
+                stringBuilder.Append(name[i]);
+            }
+            return stringBuilder.ToString();
         }
 
         private void RemainderTimeLoad()
@@ -166,6 +182,26 @@ namespace DesktopStickyNote
         {
             ActiveSection.ActiveButton(sender, panelSideMenu);
             ShowForm(panelSetting);
+
+            var positionTable = new DataTable();
+            positionTable.Columns.Add("Id");
+            positionTable.Columns.Add("Name");
+
+            foreach (GlobalSs.Position pos in Enum.GetValues(typeof(GlobalSs.Position)))
+            {
+                var sIndex = (int) pos;
+
+                var formattedName = PositionNameFormat(pos.ToString());
+
+                positionTable.Rows.Add(sIndex, formattedName);
+            }
+
+            comboBoxWindoPosition.Items.Clear();
+            comboBoxWindoPosition.ValueMember = "Id";
+            comboBoxWindoPosition.DisplayMember = "Name";
+            comboBoxWindoPosition.DataSource = positionTable;
+
+            comboBoxWindoPosition.SelectedValue = (int) GlobalSs.CurrentPosition;
         }
 
         private void buttonReminder_Click(object sender, EventArgs e)
@@ -530,6 +566,11 @@ namespace DesktopStickyNote
         private void comboBoxRemainderHour_SelectedIndexChanged(object sender, EventArgs e)
         {
             labelNewRemainderTime.Text = comboBoxRemainderHour.Text + @"." + comboBoxRemainderMunite.Text;
+        }
+
+        private void comboBoxWindoPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GlobalSs.SetValue(GlobalSs.KeyVariable.Position, comboBoxWindoPosition.SelectedValue.ToString());
         }
     }
 }
