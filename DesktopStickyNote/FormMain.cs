@@ -85,7 +85,7 @@ namespace DesktopStickyNote
                         _formLocationX = GlobalSs.AlwaysVisible ? 0 : -_formWidth + 1;
                         _formLocationY = _dHeight - _formHeight;
                         break;
-                    case GlobalSs.Position.LeftMiddle:
+                    case GlobalSs.Position.LeftCenter:
                         _formWidth = _formWidthDefault;
                         _formHeight = _dHeight - 150;
                         _formLocationX = GlobalSs.AlwaysVisible ? 0 : -_formWidth + 1;
@@ -103,7 +103,7 @@ namespace DesktopStickyNote
                         _formLocationX = 0;
                         _formLocationY = GlobalSs.AlwaysVisible ? 0 : -_formHeight + 1;
                         break;
-                    case GlobalSs.Position.TopMiddle:
+                    case GlobalSs.Position.TopCenter:
                         _formWidth = _dWidth - 500;
                         _formHeight = _formHeightDefault;
                         _formLocationX = (_dWidth / 2) - (_formWidth / 2);
@@ -121,7 +121,7 @@ namespace DesktopStickyNote
                         _formLocationX = GlobalSs.AlwaysVisible ? _dWidth - _formWidth : _dWidth - 1;
                         _formLocationY = 0;
                         break;
-                    case GlobalSs.Position.RightMiddle:
+                    case GlobalSs.Position.RightCenter:
                         _formWidth = _formWidthDefault;
                         _formHeight = _dHeight - 150;
                         _formLocationX = GlobalSs.AlwaysVisible ? _dWidth - _formWidth : _dWidth - 1;
@@ -147,17 +147,17 @@ namespace DesktopStickyNote
                         switch (GlobalSs.CurrentPosition)
                         {
                             case GlobalSs.Position.LeftBottom:
-                            case GlobalSs.Position.LeftMiddle:
+                            case GlobalSs.Position.LeftCenter:
                             case GlobalSs.Position.LeftTop:
                                 _formLocationX = 0;
                                 break;
                             case GlobalSs.Position.TopLeft:
-                            case GlobalSs.Position.TopMiddle:
+                            case GlobalSs.Position.TopCenter:
                             case GlobalSs.Position.TopRight:
                                 _formLocationY = 0;
                                 break;
                             case GlobalSs.Position.RightTop:
-                            case GlobalSs.Position.RightMiddle:
+                            case GlobalSs.Position.RightCenter:
                             case GlobalSs.Position.RightBottom:
                                 _formLocationX = _dWidth - _formWidth;
                                 break;
@@ -174,7 +174,7 @@ namespace DesktopStickyNote
                         switch (GlobalSs.CurrentPosition)
                         {
                             case GlobalSs.Position.LeftBottom:
-                            case GlobalSs.Position.LeftMiddle:
+                            case GlobalSs.Position.LeftCenter:
                             case GlobalSs.Position.LeftTop:
                                 if (mousePositionX >= (this.Location.X + _formWidth) ||
                                     mousePositionY >= (this.Location.Y + _formHeight) ||
@@ -185,7 +185,7 @@ namespace DesktopStickyNote
 
                                 break;
                             case GlobalSs.Position.TopLeft:
-                            case GlobalSs.Position.TopMiddle:
+                            case GlobalSs.Position.TopCenter:
                             case GlobalSs.Position.TopRight:
                                 if (mousePositionX <= this.Location.X ||
                                     mousePositionY >= (this.Location.Y + _formHeight) ||
@@ -196,7 +196,7 @@ namespace DesktopStickyNote
 
                                 break;
                             case GlobalSs.Position.RightTop:
-                            case GlobalSs.Position.RightMiddle:
+                            case GlobalSs.Position.RightCenter:
                             case GlobalSs.Position.RightBottom:
                                 if (mousePositionX <= this.Location.X ||
                                     mousePositionY >= (this.Location.Y + _formHeight) ||

@@ -20,18 +20,18 @@ namespace DesktopStickyNote
         public static int RemainTimeMinutes = 5;
         public static string RemainLaterItems;
         public static bool RemainTimerStop = false;
-        public static Position CurrentPosition = Position.RightMiddle;
+        public static Position CurrentPosition = Position.RightCenter;
 
         public enum Position
         {
             LeftBottom = 1,
-            LeftMiddle = 2,
+            LeftCenter = 2,
             LeftTop = 3,
             TopLeft = 4,
-            TopMiddle = 5,
+            TopCenter = 5,
             TopRight = 6,
             RightTop = 7,
-            RightMiddle = 8,
+            RightCenter = 8,
             RightBottom = 9
         }
 
