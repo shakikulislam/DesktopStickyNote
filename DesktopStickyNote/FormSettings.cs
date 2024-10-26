@@ -18,16 +18,10 @@ namespace DesktopStickyNote
         public FormSettings()
         {
             InitializeComponent();
-            LoadSettings();
-            
-            var newFont = GlobalSs.GetFont();
+            this.Icon = new FormMain().Icon;
 
-            labelFontFamily.Text = newFont.Name;
-            labelFontFamily.ForeColor = GlobalSs.FontColor;
-            labelFontSize.Text = newFont.Size.ToString("");
-            labelFontStyle.Text = newFont.Style.ToString();
-
-            RemainderTimeLoad();
+            var restartImg = new Bitmap(Resources.restart_64, new Size(30, 30));
+            buttonRestartApplication.Image = restartImg;
         }
 
         private string PositionNameFormat(string name)
@@ -43,28 +37,7 @@ namespace DesktopStickyNote
             }
             return stringBuilder.ToString();
         }
-
-        private void RemainderTimeLoad()
-        {
-            for (var s = 0; s <= 12; s++)
-            {
-                comboBoxRemainderHour.Items.Add(s < 10 ? "0" + s : s.ToString());
-            }
-
-            for (var s = 1; s <= 59; s++)
-            {
-                comboBoxRemainderMunite.Items.Add(s < 10 ? "0" + s : s.ToString());
-            }
-
-            var hour = GlobalSs.RemainTimeHour;
-            var minute = GlobalSs.RemainTimeMinutes;
-            var showHour = hour < 10 ? "0" + hour : hour.ToString();
-            var showMinute = minute < 10 ? "0" + minute : minute.ToString();
-            comboBoxRemainderHour.Text = showHour;
-            comboBoxRemainderMunite.Text = showMinute;
-            labelNewRemainderTime.Text = showHour + @"." + showMinute;
-        }
-
+        
         private void LoadEvent()
         {
             try
@@ -176,6 +149,53 @@ namespace DesktopStickyNote
         private void LoadSettings()
         {
             checkBoxAlwaysVisible.Checked = GlobalSs.AlwaysVisible;
+
+            //Load Font
+            var newFont = GlobalSs.GetFont();
+
+            labelFontFamily.Text = newFont.Name;
+            labelFontFamily.ForeColor = GlobalSs.FontColor;
+            labelFontSize.Text = newFont.Size.ToString("");
+            labelFontStyle.Text = newFont.Style.ToString();
+
+            //Load Positions in Combobox
+            var positionTable = new DataTable();
+            positionTable.Columns.Add("Id");
+            positionTable.Columns.Add("Name");
+
+            foreach (GlobalSs.Position pos in Enum.GetValues(typeof(GlobalSs.Position)))
+            {
+                var sIndex = (int)pos;
+
+                var formattedName = PositionNameFormat(pos.ToString());
+
+                positionTable.Rows.Add(sIndex, formattedName);
+            }
+
+            comboBoxWindoPosition.ValueMember = "Id";
+            comboBoxWindoPosition.DisplayMember = "Name";
+            comboBoxWindoPosition.DataSource = positionTable;
+
+            comboBoxWindoPosition.SelectedValue = (int)GlobalSs.CurrentPosition;
+
+            //Remainder Time
+            for (var s = 0; s <= 12; s++)
+            {
+                comboBoxRemainderHour.Items.Add(s < 10 ? "0" + s : s.ToString());
+            }
+
+            for (var s = 1; s <= 59; s++)
+            {
+                comboBoxRemainderMunite.Items.Add(s < 10 ? "0" + s : s.ToString());
+            }
+
+            var hour = GlobalSs.RemainTimeHour;
+            var minute = GlobalSs.RemainTimeMinutes;
+            var showHour = hour < 10 ? "0" + hour : hour.ToString();
+            var showMinute = minute < 10 ? "0" + minute : minute.ToString();
+            comboBoxRemainderHour.Text = showHour;
+            comboBoxRemainderMunite.Text = showMinute;
+            labelNewRemainderTime.Text = showHour + @"." + showMinute;
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
@@ -183,25 +203,7 @@ namespace DesktopStickyNote
             ActiveSection.ActiveButton(sender, panelSideMenu);
             ShowForm(panelSetting);
 
-            var positionTable = new DataTable();
-            positionTable.Columns.Add("Id");
-            positionTable.Columns.Add("Name");
-
-            foreach (GlobalSs.Position pos in Enum.GetValues(typeof(GlobalSs.Position)))
-            {
-                var sIndex = (int) pos;
-
-                var formattedName = PositionNameFormat(pos.ToString());
-
-                positionTable.Rows.Add(sIndex, formattedName);
-            }
-
-            comboBoxWindoPosition.Items.Clear();
-            comboBoxWindoPosition.ValueMember = "Id";
-            comboBoxWindoPosition.DisplayMember = "Name";
-            comboBoxWindoPosition.DataSource = positionTable;
-
-            comboBoxWindoPosition.SelectedValue = (int) GlobalSs.CurrentPosition;
+            LoadSettings();
         }
 
         private void buttonReminder_Click(object sender, EventArgs e)
@@ -216,12 +218,18 @@ namespace DesktopStickyNote
             dateTimePickerTo.CustomFormat = _dateFormat;
 
             groupBoxCategory.Location = new Point(10, 70);
-            groupBoxCategory.Height = 180;
+            groupBoxCategory.Size = new Size(370, 180);
             groupBoxCategory.Visible = false;
 
+            listViewCategory.Location = new Point(6, 81);
+            listViewCategory.Size = new Size(358, 94);
+
             groupBoxEvent.Location=new Point(10,70);
-            groupBoxEvent.Height = 180;
+            groupBoxEvent.Size = new Size(370, 180);
             groupBoxEvent.Visible = true;
+
+            listViewEventList.Location = new Point(10, 256);
+            listViewEventList.Size = new Size(370, 175);
 
             LoadCategory();
             LoadEvent();
@@ -250,11 +258,6 @@ namespace DesktopStickyNote
                 GlobalSs.SetValue(GlobalSs.KeyVariable.FontColor, fontDialog.Color.Name);
 
                 fontDialog.Dispose();
-
-                if (MessageBox.Show(@"Restart Application for Change"+Environment.NewLine+@"Press 'Cancel or Close' for Restart Letter", @"Restart", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning)==DialogResult.Yes)
-                {
-                    Application.Restart();
-                }
             }
         }
 
@@ -571,6 +574,16 @@ namespace DesktopStickyNote
         private void comboBoxWindoPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalSs.SetValue(GlobalSs.KeyVariable.Position, comboBoxWindoPosition.SelectedValue.ToString());
+        }
+
+        private void buttonRestartApplication_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void FormSettings_Load(object sender, EventArgs e)
+        {
+            buttonSettings.PerformClick();
         }
     }
 }

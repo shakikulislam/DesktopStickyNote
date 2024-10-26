@@ -1,4 +1,6 @@
-﻿namespace DesktopStickyNote
+﻿using DesktopStickyNote.Properties;
+
+namespace DesktopStickyNote
 {
     partial class FormAlert
     {
@@ -28,13 +30,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlert));
             this.panelBarLeft = new System.Windows.Forms.Panel();
             this.panelBarRight = new System.Windows.Forms.Panel();
             this.panelBarButtom = new System.Windows.Forms.Panel();
             this.panelBarTop = new System.Windows.Forms.Panel();
             this.labelCategory = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
             this.buttonRemainLater = new System.Windows.Forms.Button();
             this.buttonDone = new System.Windows.Forms.Button();
@@ -42,6 +42,7 @@
             this.labelToDate = new System.Windows.Forms.Label();
             this.labelRemainAfter = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,6 +85,7 @@
             // labelCategory
             // 
             this.labelCategory.BackColor = System.Drawing.Color.Transparent;
+            this.labelCategory.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.labelCategory.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCategory.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCategory.ForeColor = System.Drawing.Color.White;
@@ -95,16 +97,6 @@
             this.labelCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCategory_MouseDown);
             this.labelCategory.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelCategory_MouseMove);
             this.labelCategory.MouseUp += new System.Windows.Forms.MouseEventHandler(this.labelCategory_MouseUp);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DesktopStickyNote.Properties.Resources.group_message_64;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 57);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
             // 
             // richTextBoxMessage
             // 
@@ -194,6 +186,16 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "Remove Event";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DesktopStickyNote.Properties.Resources.group_message_64;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 57);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormAlert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,9 +216,7 @@
             this.Controls.Add(this.panelBarLeft);
             this.Controls.Add(this.labelRemainAfter);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAlert";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAlert";
             this.TopMost = true;

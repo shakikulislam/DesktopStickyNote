@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DesktopStickyNote.Properties;
 
 namespace DesktopStickyNote
 {
@@ -14,6 +15,7 @@ namespace DesktopStickyNote
         public FormAlert(string[] singleEvent)
         {
             InitializeComponent();
+            this.Icon = new FormMain().Icon;
 
             _id = singleEvent[0];
             labelCategory.Text = singleEvent[1];
@@ -141,5 +143,7 @@ namespace DesktopStickyNote
         {
             _isMouseDown = false;
         }
+
+
     }
 }
