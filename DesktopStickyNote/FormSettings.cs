@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -20,8 +21,6 @@ namespace DesktopStickyNote
             InitializeComponent();
             this.Icon = new FormMain().Icon;
 
-            var restartImg = new Bitmap(Resources.restart_64, new Size(30, 30));
-            buttonRestartApplication.Image = restartImg;
         }
 
         private string PositionNameFormat(string name)
@@ -585,5 +584,121 @@ namespace DesktopStickyNote
         {
             buttonSettings.PerformClick();
         }
+
+        private void buttonBackupRestore_Click(object sender, EventArgs e)
+        {
+            ActiveSection.ActiveButton(sender, panelSideMenu);
+            ShowForm(panelBackupRestore);
+        }
+        
+        private void linkLabelBrowse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    textBoxBackupFolderLocation.Text = fbd.SelectedPath + @"\";
+                }
+            }
+        }
+
+        private void buttonBackup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (textBoxBackupFolderLocation.Text == "")
+                {
+                    MessageBox.Show(@"Please select a Backup folder");
+                    return;
+                }
+
+                var currentDate = DateTime.Now;
+                var fileName = @"DSN_" + currentDate.Year + "" + currentDate.Month + "" + currentDate.Day + "_" +
+                               currentDate.Hour + "" + currentDate.Minute + "" + currentDate.Second + ".bac";
+                labelBackupFileName.Text = fileName;
+                var filePath = textBoxBackupFolderLocation.Text.Trim() + fileName;
+
+                var keyVariables = typeof(KeyVariables).GetProperties();
+                var backupString = new StringBuilder();
+
+                foreach (var property in keyVariables)
+                {
+                    try
+                    {
+                        var value = GlobalSs.GetValue(property.Name);
+                        backupString.AppendLine(GlobalSs.Encrypt(property.Name) + ":" + GlobalSs.Encrypt(value));
+                    }
+                    catch (Exception ex)
+                    {
+                        //
+                    }
+                }
+
+                File.WriteAllText(filePath, backupString.ToString());
+                MessageBox.Show(@"Backup completed successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
+
+        private void linkLabelBrowseFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                using (var ofd = new OpenFileDialog())
+                {
+                    ofd.Title = @"Select a DSK Backup File";
+                    ofd.Filter = @"Backup files (*.bac)|*.bac";
+
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        textBoxBackupFIleLocation.Tag = ofd.FileName;
+                        textBoxBackupFIleLocation.Text = ofd.SafeFileName;
+                        buttonRestore.Enabled = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonRestore_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var filePath = textBoxBackupFIleLocation.Tag.ToString();
+
+                if (File.Exists(filePath))
+                {
+                    var lines = File.ReadAllLines(filePath);
+
+                    foreach (var line in lines)
+                    {
+                        var parts = line.Split(new[] { ":" }, StringSplitOptions.None);
+
+                        if (parts.Length == 2)
+                        {
+                            var keyVariable = GlobalSs.Decrypt(parts[0].Trim());
+                            var keyValue = GlobalSs.Decrypt(parts[1].Trim());
+
+                            GlobalSs.SetValue(keyVariable, keyValue);
+                        }
+                    }
+
+                    Application.Restart();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
     }
 }

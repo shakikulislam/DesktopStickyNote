@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.Win32;
 
 namespace DesktopStickyNote
@@ -90,18 +92,62 @@ namespace DesktopStickyNote
                 return DefaultFont;
             }
         }
+
+        public static string Encrypt(string text)
+        {
+            var data = Encoding.UTF8.GetBytes(text);
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                var keys = md5.ComputeHash(Encoding.UTF8.GetBytes("$15s*9S@"));
+                using (var tripleDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    var cryptoTransform = tripleDes.CreateEncryptor();
+                    var result = cryptoTransform.TransformFinalBlock(data, 0, data.Length);
+                    return Convert.ToBase64String(result, 0, result.Length);
+                }
+            }
+        }
+
+        public static string Decrypt(string text)
+        {
+            var data = Convert.FromBase64String(text);
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                var keys = md5.ComputeHash(Encoding.UTF8.GetBytes("$15s*9S@"));
+                using (var tripleDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    var cryptoTransform = tripleDes.CreateDecryptor();
+                    var result = cryptoTransform.TransformFinalBlock(data, 0, data.Length);
+                    return Encoding.UTF8.GetString(result);
+                }
+            }
+        }
         
     }
 
     public class KeyVariables
     {
-        public string AlwaysVisible = "AlwaysVisible";
-        public string Category = "Category";
-        public string Font = "Font";
-        public string FontColor = "FontColor";
-        public string Events = "Events";
-        public string Note = "Note";
-        public string RemainTime = "RemainTime";
-        public string Position = "Position";
+        // Properties
+        public string AlwaysVisible { get; set; }
+        public string Category { get; set; }
+        public string Font { get; set; }
+        public string FontColor { get; set; }
+        public string Events { get; set; }
+        public string Note { get; set; }
+        public string RemainTime { get; set; }
+        public string Position { get; set; }
+
+        // Constructor to initialize default values
+        public KeyVariables()
+        {
+            AlwaysVisible = "AlwaysVisible";
+            Category = "Category";
+            Font = "Font";
+            FontColor = "FontColor";
+            Events = "Events";
+            Note = "Note";
+            RemainTime = "RemainTime";
+            Position = "Position";
+        }
     }
 }

@@ -63,6 +63,16 @@ namespace DesktopStickyNote.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backup_restore_16 {
+            get {
+                object obj = ResourceManager.GetObject("backup_restore_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_property_64 {
             get {
                 object obj = ResourceManager.GetObject("edit_property_64", resourceCulture);
@@ -113,9 +123,9 @@ namespace DesktopStickyNote.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap restart_64 {
+        internal static System.Drawing.Bitmap restart_16 {
             get {
-                object obj = ResourceManager.GetObject("restart_64", resourceCulture);
+                object obj = ResourceManager.GetObject("restart_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

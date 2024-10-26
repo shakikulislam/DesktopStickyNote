@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DesktopStickyNote.Properties;
 
 namespace DesktopStickyNote
 {

@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DesktopStickyNote.Properties;
 
 namespace DesktopStickyNote.Theme
 {
@@ -14,7 +15,11 @@ namespace DesktopStickyNote.Theme
         private static readonly Color DeactiveForColor = Color.White;
         private static readonly Font DeactiveFont = new Font("Microsoft Sans Serif", 12F);
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="button">Clicked button</param>
+        /// <param name="panel">That panel will open</param>
         public static void ActiveButton(object button, Panel panel)
         {
             if (button!=null)
@@ -25,6 +30,11 @@ namespace DesktopStickyNote.Theme
                     btn.BackColor = DeactiveBackColor;
                     btn.ForeColor = DeactiveForColor;
                     btn.Font = DeactiveFont;
+                    
+                    if (btn.Name == "buttonBackupRestore")
+                    {
+                        btn.Image = Resources.backup_restore_16;
+                    }
                 }
 
                 // Active
@@ -32,6 +42,7 @@ namespace DesktopStickyNote.Theme
                 currentButton.BackColor = ActiveBackColor;
                 currentButton.ForeColor = ActiveForColor;
                 currentButton.Font = ActiveFont;
+                currentButton.Image = null;
             }
         }
     }

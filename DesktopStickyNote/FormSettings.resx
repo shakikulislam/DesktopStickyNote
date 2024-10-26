@@ -126,4 +126,20 @@
   <metadata name="buttonRemainderUpdate.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonRestartApplication.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAklJREFUOE+F
+        k72P00AQxd3CFUeBIiSEoOQaOiQoTnxJNMdnB1xsr53EXKClobwCHQUNdFwHDUggkqtOAgkJiQKE+DMQ
+        EkUuvrXXa+eL39jJKaGheFnv7Lw3b3Y2TpL4c/CuJonaStNGLU0j9sEc1BSuk6aqRFF0HH7CEtYGjtbe
+        ktZ+TKKF9Jz19H8FxuNWicGg6ezvu20EMhInU2xrrRCekdVLnLYXBIyJQJPD+uOK5M/Isdb1Y1q7CIg7
+        dYYWp2feozxfp+h7B2Jp8RzEERgac78lK042WTnzpwIBVdsR8QkY0vLZ8XhHBMqkz9PqT4wJZf+DikeI
+        8a1orbqH0SgS60+r3GB3MNgtBU4SGAMuz1/u9SJnb691PE19kmeoes4yceEfJS+hwCDP39VQD68TEFsf
+        QVlNRGZEcWCMO4e6FP2idWNSFG8uSqKHGpbqb61dY5xrTr8vFaU1VY7X2mgB2O/KXRTFzjUSg8vigPl+
+        NeYm+xskSBUhuozqHq484q0DQP4pHGu75zlUy2wM1XIOTxXFQ4gtBDxWD4F1SBH9P8C+jDxaIXcI+ryD
+        JQ5EXb0WRdYP1m6wL5/1goBMJ44lHnyCLBN7UT6kLNvAUuMEtnoiQoVtyIdEQMSlBRFI0/Awd/WqIqs/
+        vItanned8sIEBK5AyuRyEPoNNo3xbmeZe4uzLUi/puQErILqKcdxgIC8tAY27/Jc1XcZkbiR6VQTOsA3
+        9iuzEf8jEBKUdkKsX7ikdfMZbjr03OGi+b6zaq38Z6oRVwId5y86upvAJoHBBgAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>
