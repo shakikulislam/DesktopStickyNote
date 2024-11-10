@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DesktopStickyNote.Properties;
 
 namespace DesktopStickyNote
 {
@@ -20,53 +19,16 @@ namespace DesktopStickyNote
         {
             InitializeComponent();
 
-            try
-            {
-                bool alwaysVisible;
-                bool.TryParse(GlobalSs.GetValue(GlobalSs.KeyVariable.AlwaysVisible), out alwaysVisible);
-                GlobalSs.AlwaysVisible = alwaysVisible;
+            panelTitleBar.BackColor = GlobalSs.ThemeTopBarBackColor;
+            panelFooter.BackColor = GlobalSs.ThemeFooterBarBackColor;
+            base.BackColor = GlobalSs.ThemeBodyBackColor;
+            richTextBoxNote.BackColor = GlobalSs.ThemeBodyBackColor;
+            richTextBoxNote.ForeColor = GlobalSs.ThemeBodyTextColor;
+            labelTotalEvents.ForeColor = GlobalSs.ThemeBodyTextColor;
 
-                var fontColor = GlobalSs.GetValue(GlobalSs.KeyVariable.FontColor);
-                if (fontColor != null)
-                {
-                    GlobalSs.FontColor = Color.FromName(fontColor);
-                }
-                
-                richTextBoxNote.Text = GlobalSs.GetValue(GlobalSs.KeyVariable.Note) ?? "";
-
-                var events = GlobalSs.GetValue(GlobalSs.KeyVariable.Events);
-                GlobalSs.Events = !string.IsNullOrEmpty(events) ? events.Split('|') : null;
-
-                var remainTime = GlobalSs.GetValue(GlobalSs.KeyVariable.RemainTime);
-                if (remainTime != null)
-                {
-                    var time = remainTime.Split('.');
-                    if (time.Length == 2)
-                    {
-                        GlobalSs.RemainTimeHour = int.Parse(time[0]);
-                        GlobalSs.RemainTimeMinutes = int.Parse(time[1]);
-                    }
-                }
-
-                var position = GlobalSs.GetValue(GlobalSs.KeyVariable.Position);
-                if (position != null)
-                {
-                    var positionCode = int.Parse(position);
-                    if (positionCode >= 1 && positionCode <= 9)
-                    {
-                        GlobalSs.CurrentPosition = (GlobalSs.Position) positionCode;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            richTextBoxNote.Text = GlobalSs.GetValue(GlobalSs.KeyVariable.Note) ?? "";
             richTextBoxNote.Font = GlobalSs.GetFont();
-            richTextBoxNote.ForeColor = GlobalSs.FontColor;
-
-
+            
             ViewSticky(true);
         }
 

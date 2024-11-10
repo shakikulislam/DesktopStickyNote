@@ -75,8 +75,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Theme\ActiveSection.cs" />
-    <Compile Include="Theme\ThemeColor.cs" />
+    <Compile Include="ThemeDetails\ActiveSection.cs" />
     <EmbeddedResource Include="FormAlert.resx">
       <DependentUpon>FormAlert.cs</DependentUpon>
     </EmbeddedResource>

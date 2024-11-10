@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DesktopStickyNote.Properties;
-using DesktopStickyNote.Theme;
+using DesktopStickyNote.ThemeDetails;
 
 namespace DesktopStickyNote
 {
@@ -20,7 +20,6 @@ namespace DesktopStickyNote
         {
             InitializeComponent();
             this.Icon = new FormMain().Icon;
-
         }
 
         private string PositionNameFormat(string name)
@@ -153,7 +152,6 @@ namespace DesktopStickyNote
             var newFont = GlobalSs.GetFont();
 
             labelFontFamily.Text = newFont.Name;
-            labelFontFamily.ForeColor = GlobalSs.FontColor;
             labelFontSize.Text = newFont.Size.ToString("");
             labelFontStyle.Text = newFont.Style.ToString();
 
@@ -243,9 +241,9 @@ namespace DesktopStickyNote
         {
             var fontDialog = new FontDialog()
             {
-                Font = GlobalSs.GetFont(),
-                ShowColor = true,
-                Color = GlobalSs.FontColor
+                Font = GlobalSs.GetFont()
+                //ShowColor = true,
+                //Color = GlobalSs.FontColor
             };
 
                         
@@ -254,7 +252,7 @@ namespace DesktopStickyNote
                 var fontDtl = fontDialog.Font.Name + "," + fontDialog.Font.Size + "," + fontDialog.Font.Style;
 
                 GlobalSs.SetValue(GlobalSs.KeyVariable.Font, fontDtl);
-                GlobalSs.SetValue(GlobalSs.KeyVariable.FontColor, fontDialog.Color.Name);
+                //GlobalSs.SetValue(GlobalSs.KeyVariable.FontColor, fontDialog.Color.Name);
 
                 fontDialog.Dispose();
             }
@@ -628,7 +626,7 @@ namespace DesktopStickyNote
                         var value = GlobalSs.GetValue(property.Name);
                         backupString.AppendLine(GlobalSs.Encrypt(property.Name) + ":" + GlobalSs.Encrypt(value));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //
                     }
@@ -700,5 +698,115 @@ namespace DesktopStickyNote
             }
         }
 
+        private void buttonTheme_Click(object sender, EventArgs e)
+        {
+            ActiveSection.ActiveButton(sender, panelSideMenu);
+            ShowForm(panelTheme);
+
+            //Load Positions in Combobox
+            var table = new DataTable();
+            table.Columns.Add("Id");
+            table.Columns.Add("Name");
+
+            foreach (GlobalSs.Theme thm in Enum.GetValues(typeof(GlobalSs.Theme)))
+            {
+                var sIndex = (int) thm;
+                table.Rows.Add(sIndex, thm.ToString());
+            }
+
+            comboBoxTheme.ValueMember = "Id";
+            comboBoxTheme.DisplayMember = "Name";
+            comboBoxTheme.DataSource = table;
+
+            comboBoxTheme.SelectedValue = (int)GlobalSs.CurrentTheme;
+        }
+
+        private void comboBoxTheme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxTheme.Text==GlobalSs.Theme.Custom.ToString())
+            {
+                groupBoxCustomTheme.Visible = true;
+                groupBoxCustomTheme.Location=new Point(9,70);
+
+                panelThemeTopPanel.BackColor = GlobalSs.ThemeTopBarBackColor;
+                panelThemeBodyPanel.BackColor = GlobalSs.ThemeBodyBackColor;
+                panelThemeButtomPanel.BackColor = GlobalSs.ThemeFooterBarBackColor;
+                labelBodyTextColor.ForeColor = GlobalSs.ThemeBodyTextColor;
+            }
+            else
+            {
+                groupBoxCustomTheme.Visible = false;
+            }
+        }
+
+        private void buttonHeaderColor_Click(object sender, EventArgs e)
+        {
+            using (var colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = GlobalSs.ThemeTopBarBackColor;
+
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    GlobalSs.ThemeTopBarBackColor = colorDialog.Color;
+                    panelThemeTopPanel.BackColor = GlobalSs.ThemeTopBarBackColor;
+                }
+            }
+
+        }
+
+        private void buttonBodyColor_Click(object sender, EventArgs e)
+        {
+            using (var colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = GlobalSs.ThemeBodyBackColor;
+
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    GlobalSs.ThemeBodyBackColor = colorDialog.Color;
+                    panelThemeBodyPanel.BackColor = GlobalSs.ThemeBodyBackColor;
+                }
+            }
+        }
+        
+        private void buttonFontColor_Click(object sender, EventArgs e)
+        {
+            using (var colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = GlobalSs.ThemeBodyTextColor;
+
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    GlobalSs.ThemeBodyTextColor = colorDialog.Color;
+                    labelBodyTextColor.ForeColor = GlobalSs.ThemeBodyTextColor;
+                }
+            }
+        }
+
+        private void buttonButtonColor_Click(object sender, EventArgs e)
+        {
+            using (var colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = GlobalSs.ThemeFooterBarBackColor;
+
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    GlobalSs.ThemeFooterBarBackColor = colorDialog.Color;
+                    panelThemeButtomPanel.BackColor = GlobalSs.ThemeFooterBarBackColor;
+                }
+            }
+        }
+
+        private void buttonThemeUpdate_Click(object sender, EventArgs e)
+        {
+            var activeTheme = (int) (GlobalSs.Theme) Enum.Parse(typeof(GlobalSs.Theme), comboBoxTheme.Text);
+            
+            var themeDetails = activeTheme + "|" + GlobalSs.ThemeTopBarBackColor.ToArgb() + "|" +
+                               GlobalSs.ThemeFooterBarBackColor.ToArgb() + "|" + GlobalSs.ThemeBodyBackColor.ToArgb() + "|" +
+                               GlobalSs.ThemeBodyTextColor.ToArgb();
+
+            GlobalSs.SetValue(GlobalSs.KeyVariable.Theme, themeDetails);
+
+            MessageBox.Show(@"The theme has been successfully updated.", @"Theme Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

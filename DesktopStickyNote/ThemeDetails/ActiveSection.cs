@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DesktopStickyNote.Properties;
 
-namespace DesktopStickyNote.Theme
+namespace DesktopStickyNote.ThemeDetails
 {
     public class ActiveSection
     {

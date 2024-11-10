@@ -30,7 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.panelSideMenu = new System.Windows.Forms.Panel();
+            this.buttonTheme = new System.Windows.Forms.Button();
+            this.buttonBackupRestore = new System.Windows.Forms.Button();
             this.buttonReminder = new System.Windows.Forms.Button();
+            this.buttonRestartApplication = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelSetting = new System.Windows.Forms.Panel();
             this.groupBoxFont = new System.Windows.Forms.GroupBox();
@@ -59,6 +62,7 @@
             this.checkBoxAlwaysVisible = new System.Windows.Forms.CheckBox();
             this.panelTopBar = new System.Windows.Forms.Panel();
             this.panelReminder = new System.Windows.Forms.Panel();
+            this.pictureBoxAddCategory = new System.Windows.Forms.PictureBox();
             this.comboBoxCaregory = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelRemainder = new System.Windows.Forms.Label();
@@ -80,6 +84,7 @@
             this.textBoxNewCategory = new System.Windows.Forms.TextBox();
             this.buttonAddCategory = new System.Windows.Forms.Button();
             this.groupBoxEvent = new System.Windows.Forms.GroupBox();
+            this.pictureBoxDeleteEvent = new System.Windows.Forms.PictureBox();
             this.buttonCancelEvent = new System.Windows.Forms.Button();
             this.buttonAddEvent = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -90,43 +95,60 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panelBackupRestore = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonRestore = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonBackup = new System.Windows.Forms.Button();
-            this.labelBackupFileName = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.textBoxBackupFolderLocation = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.pictureBoxAddCategory = new System.Windows.Forms.PictureBox();
-            this.pictureBoxDeleteEvent = new System.Windows.Forms.PictureBox();
-            this.buttonBackupRestore = new System.Windows.Forms.Button();
-            this.buttonRestartApplication = new System.Windows.Forms.Button();
-            this.linkLabelBrowse = new System.Windows.Forms.LinkLabel();
             this.linkLabelBrowseFile = new System.Windows.Forms.LinkLabel();
             this.textBoxBackupFIleLocation = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonRestore = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabelBrowse = new System.Windows.Forms.LinkLabel();
+            this.labelBackupFileName = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBoxBackupFolderLocation = new System.Windows.Forms.TextBox();
+            this.buttonBackup = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.panelTheme = new System.Windows.Forms.Panel();
+            this.buttonThemeUpdate = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.comboBoxTheme = new System.Windows.Forms.ComboBox();
+            this.groupBoxCustomTheme = new System.Windows.Forms.GroupBox();
+            this.buttonFontColor = new System.Windows.Forms.Button();
+            this.buttonBodyColor = new System.Windows.Forms.Button();
+            this.buttonButtonColor = new System.Windows.Forms.Button();
+            this.buttonHeaderColor = new System.Windows.Forms.Button();
+            this.panelThemeButtomPanel = new System.Windows.Forms.Panel();
+            this.panelThemeTopPanel = new System.Windows.Forms.Panel();
+            this.panelThemeBodyPanel = new System.Windows.Forms.Panel();
+            this.labelBodyTextColor = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
             this.panelSideMenu.SuspendLayout();
             this.panelSetting.SuspendLayout();
             this.groupBoxFont.SuspendLayout();
             this.groupBoxRemainderTime.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelReminder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddCategory)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBoxCategory.SuspendLayout();
             this.groupBoxEvent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteEvent)).BeginInit();
             this.panelBackupRestore.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddCategory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteEvent)).BeginInit();
+            this.panelTheme.SuspendLayout();
+            this.groupBoxCustomTheme.SuspendLayout();
+            this.panelThemeBodyPanel.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSideMenu
             // 
             this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.panelSideMenu.Controls.Add(this.buttonTheme);
             this.panelSideMenu.Controls.Add(this.buttonBackupRestore);
             this.panelSideMenu.Controls.Add(this.buttonReminder);
             this.panelSideMenu.Controls.Add(this.buttonRestartApplication);
@@ -136,6 +158,42 @@
             this.panelSideMenu.Name = "panelSideMenu";
             this.panelSideMenu.Size = new System.Drawing.Size(133, 434);
             this.panelSideMenu.TabIndex = 0;
+            // 
+            // buttonTheme
+            // 
+            this.buttonTheme.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonTheme.FlatAppearance.BorderSize = 0;
+            this.buttonTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTheme.ForeColor = System.Drawing.Color.White;
+            this.buttonTheme.Location = new System.Drawing.Point(0, 84);
+            this.buttonTheme.Name = "buttonTheme";
+            this.buttonTheme.Size = new System.Drawing.Size(133, 42);
+            this.buttonTheme.TabIndex = 4;
+            this.buttonTheme.Text = "Theme";
+            this.buttonTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTheme.UseVisualStyleBackColor = true;
+            this.buttonTheme.Click += new System.EventHandler(this.buttonTheme_Click);
+            // 
+            // buttonBackupRestore
+            // 
+            this.buttonBackupRestore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
+            this.buttonBackupRestore.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonBackupRestore.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonBackupRestore.FlatAppearance.BorderSize = 0;
+            this.buttonBackupRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBackupRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBackupRestore.ForeColor = System.Drawing.Color.White;
+            this.buttonBackupRestore.Image = global::DesktopStickyNote.Properties.Resources.backup_restore_16;
+            this.buttonBackupRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonBackupRestore.Location = new System.Drawing.Point(0, 364);
+            this.buttonBackupRestore.Name = "buttonBackupRestore";
+            this.buttonBackupRestore.Size = new System.Drawing.Size(133, 35);
+            this.buttonBackupRestore.TabIndex = 3;
+            this.buttonBackupRestore.Text = "Backup";
+            this.buttonBackupRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonBackupRestore.UseVisualStyleBackColor = false;
+            this.buttonBackupRestore.Click += new System.EventHandler(this.buttonBackupRestore_Click);
             // 
             // buttonReminder
             // 
@@ -152,6 +210,25 @@
             this.buttonReminder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonReminder.UseVisualStyleBackColor = true;
             this.buttonReminder.Click += new System.EventHandler(this.buttonReminder_Click);
+            // 
+            // buttonRestartApplication
+            // 
+            this.buttonRestartApplication.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
+            this.buttonRestartApplication.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonRestartApplication.FlatAppearance.BorderSize = 0;
+            this.buttonRestartApplication.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRestartApplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRestartApplication.ForeColor = System.Drawing.Color.White;
+            this.buttonRestartApplication.Image = ((System.Drawing.Image)(resources.GetObject("buttonRestartApplication.Image")));
+            this.buttonRestartApplication.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonRestartApplication.Location = new System.Drawing.Point(0, 399);
+            this.buttonRestartApplication.Name = "buttonRestartApplication";
+            this.buttonRestartApplication.Size = new System.Drawing.Size(133, 35);
+            this.buttonRestartApplication.TabIndex = 2;
+            this.buttonRestartApplication.Text = "Restart";
+            this.buttonRestartApplication.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonRestartApplication.UseVisualStyleBackColor = false;
+            this.buttonRestartApplication.Click += new System.EventHandler(this.buttonRestartApplication_Click);
             // 
             // buttonSettings
             // 
@@ -181,9 +258,9 @@
             this.panelSetting.Controls.Add(this.label1);
             this.panelSetting.Controls.Add(this.checkBoxAlwaysVisible);
             this.panelSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelSetting.Location = new System.Drawing.Point(150, 8);
+            this.panelSetting.Location = new System.Drawing.Point(139, 8);
             this.panelSetting.Name = "panelSetting";
-            this.panelSetting.Size = new System.Drawing.Size(365, 28);
+            this.panelSetting.Size = new System.Drawing.Size(376, 30);
             this.panelSetting.TabIndex = 1;
             this.panelSetting.Visible = false;
             // 
@@ -201,7 +278,7 @@
             this.groupBoxFont.Controls.Add(this.label16);
             this.groupBoxFont.Location = new System.Drawing.Point(9, 178);
             this.groupBoxFont.Name = "groupBoxFont";
-            this.groupBoxFont.Size = new System.Drawing.Size(347, 102);
+            this.groupBoxFont.Size = new System.Drawing.Size(358, 102);
             this.groupBoxFont.TabIndex = 3;
             this.groupBoxFont.TabStop = false;
             this.groupBoxFont.Text = "Font";
@@ -249,7 +326,7 @@
             this.buttonSelectFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSelectFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSelectFont.ForeColor = System.Drawing.Color.Green;
-            this.buttonSelectFont.Location = new System.Drawing.Point(221, 68);
+            this.buttonSelectFont.Location = new System.Drawing.Point(232, 68);
             this.buttonSelectFont.Name = "buttonSelectFont";
             this.buttonSelectFont.Size = new System.Drawing.Size(120, 28);
             this.buttonSelectFont.TabIndex = 0;
@@ -280,7 +357,7 @@
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.Red;
-            this.label16.Location = new System.Drawing.Point(227, 40);
+            this.label16.Location = new System.Drawing.Point(238, 40);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(114, 30);
             this.label16.TabIndex = 19;
@@ -333,7 +410,7 @@
             this.groupBoxRemainderTime.Controls.Add(this.comboBoxRemainderHour);
             this.groupBoxRemainderTime.Location = new System.Drawing.Point(9, 91);
             this.groupBoxRemainderTime.Name = "groupBoxRemainderTime";
-            this.groupBoxRemainderTime.Size = new System.Drawing.Size(347, 81);
+            this.groupBoxRemainderTime.Size = new System.Drawing.Size(358, 81);
             this.groupBoxRemainderTime.TabIndex = 2;
             this.groupBoxRemainderTime.TabStop = false;
             this.groupBoxRemainderTime.Text = "Remainder Time";
@@ -345,7 +422,7 @@
             this.buttonRemainderUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRemainderUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRemainderUpdate.ForeColor = System.Drawing.Color.Green;
-            this.buttonRemainderUpdate.Location = new System.Drawing.Point(264, 23);
+            this.buttonRemainderUpdate.Location = new System.Drawing.Point(275, 23);
             this.buttonRemainderUpdate.Name = "buttonRemainderUpdate";
             this.buttonRemainderUpdate.Size = new System.Drawing.Size(69, 42);
             this.buttonRemainderUpdate.TabIndex = 2;
@@ -423,7 +500,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(365, 26);
+            this.panel1.Size = new System.Drawing.Size(376, 26);
             this.panel1.TabIndex = 11;
             // 
             // label6
@@ -431,7 +508,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(296, 5);
+            this.label6.Location = new System.Drawing.Point(307, 5);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 16);
             this.label6.TabIndex = 10;
@@ -477,11 +554,23 @@
             this.panelReminder.Controls.Add(this.groupBoxCategory);
             this.panelReminder.Controls.Add(this.groupBoxEvent);
             this.panelReminder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelReminder.Location = new System.Drawing.Point(145, 39);
+            this.panelReminder.Location = new System.Drawing.Point(145, 369);
             this.panelReminder.Name = "panelReminder";
-            this.panelReminder.Size = new System.Drawing.Size(370, 30);
+            this.panelReminder.Size = new System.Drawing.Size(370, 28);
             this.panelReminder.TabIndex = 11;
             this.panelReminder.Visible = false;
+            // 
+            // pictureBoxAddCategory
+            // 
+            this.pictureBoxAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxAddCategory.Image = global::DesktopStickyNote.Properties.Resources.edit_property_64;
+            this.pictureBoxAddCategory.Location = new System.Drawing.Point(332, 30);
+            this.pictureBoxAddCategory.Name = "pictureBoxAddCategory";
+            this.pictureBoxAddCategory.Size = new System.Drawing.Size(30, 30);
+            this.pictureBoxAddCategory.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxAddCategory.TabIndex = 15;
+            this.pictureBoxAddCategory.TabStop = false;
+            this.pictureBoxAddCategory.Click += new System.EventHandler(this.pictureBoxAddCategory_Click);
             // 
             // comboBoxCaregory
             // 
@@ -689,6 +778,18 @@
             this.groupBoxEvent.TabStop = false;
             this.groupBoxEvent.Text = "New Event";
             // 
+            // pictureBoxDeleteEvent
+            // 
+            this.pictureBoxDeleteEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxDeleteEvent.Image = global::DesktopStickyNote.Properties.Resources.trash_64;
+            this.pictureBoxDeleteEvent.Location = new System.Drawing.Point(241, 140);
+            this.pictureBoxDeleteEvent.Name = "pictureBoxDeleteEvent";
+            this.pictureBoxDeleteEvent.Size = new System.Drawing.Size(31, 24);
+            this.pictureBoxDeleteEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDeleteEvent.TabIndex = 25;
+            this.pictureBoxDeleteEvent.TabStop = false;
+            this.pictureBoxDeleteEvent.Click += new System.EventHandler(this.pictureBoxDeleteEvent_Click);
+            // 
             // buttonCancelEvent
             // 
             this.buttonCancelEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -776,9 +877,9 @@
             this.panelBackupRestore.Controls.Add(this.groupBox2);
             this.panelBackupRestore.Controls.Add(this.panel4);
             this.panelBackupRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelBackupRestore.Location = new System.Drawing.Point(146, 78);
+            this.panelBackupRestore.Location = new System.Drawing.Point(147, 401);
             this.panelBackupRestore.Name = "panelBackupRestore";
-            this.panelBackupRestore.Size = new System.Drawing.Size(365, 331);
+            this.panelBackupRestore.Size = new System.Drawing.Size(365, 30);
             this.panelBackupRestore.TabIndex = 12;
             this.panelBackupRestore.Visible = false;
             // 
@@ -796,197 +897,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Restore";
-            // 
-            // buttonRestore
-            // 
-            this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRestore.Enabled = false;
-            this.buttonRestore.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.buttonRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRestore.ForeColor = System.Drawing.Color.Green;
-            this.buttonRestore.Location = new System.Drawing.Point(221, 96);
-            this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(120, 28);
-            this.buttonRestore.TabIndex = 0;
-            this.buttonRestore.Text = "Restore";
-            this.buttonRestore.UseVisualStyleBackColor = true;
-            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.linkLabelBrowse);
-            this.groupBox2.Controls.Add(this.labelBackupFileName);
-            this.groupBox2.Controls.Add(this.label22);
-            this.groupBox2.Controls.Add(this.textBoxBackupFolderLocation);
-            this.groupBox2.Controls.Add(this.buttonBackup);
-            this.groupBox2.Controls.Add(this.label28);
-            this.groupBox2.Location = new System.Drawing.Point(9, 41);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(347, 130);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Backup";
-            // 
-            // buttonBackup
-            // 
-            this.buttonBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBackup.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.buttonBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBackup.ForeColor = System.Drawing.Color.Green;
-            this.buttonBackup.Location = new System.Drawing.Point(221, 95);
-            this.buttonBackup.Name = "buttonBackup";
-            this.buttonBackup.Size = new System.Drawing.Size(120, 28);
-            this.buttonBackup.TabIndex = 2;
-            this.buttonBackup.Text = "Backup";
-            this.buttonBackup.UseVisualStyleBackColor = true;
-            this.buttonBackup.Click += new System.EventHandler(this.buttonBackup_Click);
-            // 
-            // labelBackupFileName
-            // 
-            this.labelBackupFileName.AutoSize = true;
-            this.labelBackupFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBackupFileName.ForeColor = System.Drawing.Color.DarkOrange;
-            this.labelBackupFileName.Location = new System.Drawing.Point(142, 76);
-            this.labelBackupFileName.Name = "labelBackupFileName";
-            this.labelBackupFileName.Size = new System.Drawing.Size(13, 16);
-            this.labelBackupFileName.TabIndex = 17;
-            this.labelBackupFileName.Text = "-";
-            this.labelBackupFileName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(14, 30);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(157, 17);
-            this.label28.TabIndex = 12;
-            this.label28.Text = "Backup Folder Location";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label29);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(365, 26);
-            this.panel4.TabIndex = 11;
-            // 
-            // label29
-            // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(232, 5);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(128, 16);
-            this.label29.TabIndex = 10;
-            this.label29.Text = "Backup / Restore";
-            // 
-            // textBoxBackupFolderLocation
-            // 
-            this.textBoxBackupFolderLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBackupFolderLocation.Location = new System.Drawing.Point(17, 50);
-            this.textBoxBackupFolderLocation.Name = "textBoxBackupFolderLocation";
-            this.textBoxBackupFolderLocation.ReadOnly = true;
-            this.textBoxBackupFolderLocation.Size = new System.Drawing.Size(264, 23);
-            this.textBoxBackupFolderLocation.TabIndex = 18;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(14, 76);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(126, 17);
-            this.label22.TabIndex = 19;
-            this.label22.Text = "Backup File Name:";
-            // 
-            // pictureBoxAddCategory
-            // 
-            this.pictureBoxAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxAddCategory.Image = global::DesktopStickyNote.Properties.Resources.edit_property_64;
-            this.pictureBoxAddCategory.Location = new System.Drawing.Point(332, 30);
-            this.pictureBoxAddCategory.Name = "pictureBoxAddCategory";
-            this.pictureBoxAddCategory.Size = new System.Drawing.Size(30, 30);
-            this.pictureBoxAddCategory.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxAddCategory.TabIndex = 15;
-            this.pictureBoxAddCategory.TabStop = false;
-            this.pictureBoxAddCategory.Click += new System.EventHandler(this.pictureBoxAddCategory_Click);
-            // 
-            // pictureBoxDeleteEvent
-            // 
-            this.pictureBoxDeleteEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxDeleteEvent.Image = global::DesktopStickyNote.Properties.Resources.trash_64;
-            this.pictureBoxDeleteEvent.Location = new System.Drawing.Point(241, 140);
-            this.pictureBoxDeleteEvent.Name = "pictureBoxDeleteEvent";
-            this.pictureBoxDeleteEvent.Size = new System.Drawing.Size(31, 24);
-            this.pictureBoxDeleteEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxDeleteEvent.TabIndex = 25;
-            this.pictureBoxDeleteEvent.TabStop = false;
-            this.pictureBoxDeleteEvent.Click += new System.EventHandler(this.pictureBoxDeleteEvent_Click);
-            // 
-            // buttonBackupRestore
-            // 
-            this.buttonBackupRestore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
-            this.buttonBackupRestore.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonBackupRestore.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonBackupRestore.FlatAppearance.BorderSize = 0;
-            this.buttonBackupRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBackupRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBackupRestore.ForeColor = System.Drawing.Color.White;
-            this.buttonBackupRestore.Image = global::DesktopStickyNote.Properties.Resources.backup_restore_16;
-            this.buttonBackupRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonBackupRestore.Location = new System.Drawing.Point(0, 364);
-            this.buttonBackupRestore.Name = "buttonBackupRestore";
-            this.buttonBackupRestore.Size = new System.Drawing.Size(133, 35);
-            this.buttonBackupRestore.TabIndex = 3;
-            this.buttonBackupRestore.Text = "Backup";
-            this.buttonBackupRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonBackupRestore.UseVisualStyleBackColor = false;
-            this.buttonBackupRestore.Click += new System.EventHandler(this.buttonBackupRestore_Click);
-            // 
-            // buttonRestartApplication
-            // 
-            this.buttonRestartApplication.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
-            this.buttonRestartApplication.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonRestartApplication.FlatAppearance.BorderSize = 0;
-            this.buttonRestartApplication.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRestartApplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRestartApplication.ForeColor = System.Drawing.Color.White;
-            this.buttonRestartApplication.Image = ((System.Drawing.Image)(resources.GetObject("buttonRestartApplication.Image")));
-            this.buttonRestartApplication.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRestartApplication.Location = new System.Drawing.Point(0, 399);
-            this.buttonRestartApplication.Name = "buttonRestartApplication";
-            this.buttonRestartApplication.Size = new System.Drawing.Size(133, 35);
-            this.buttonRestartApplication.TabIndex = 2;
-            this.buttonRestartApplication.Text = "Restart";
-            this.buttonRestartApplication.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonRestartApplication.UseVisualStyleBackColor = false;
-            this.buttonRestartApplication.Click += new System.EventHandler(this.buttonRestartApplication_Click);
-            // 
-            // linkLabelBrowse
-            // 
-            this.linkLabelBrowse.ActiveLinkColor = System.Drawing.Color.Black;
-            this.linkLabelBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabelBrowse.AutoSize = true;
-            this.linkLabelBrowse.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabelBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabelBrowse.DisabledLinkColor = System.Drawing.Color.Black;
-            this.linkLabelBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelBrowse.ForeColor = System.Drawing.Color.Black;
-            this.linkLabelBrowse.LinkColor = System.Drawing.Color.Black;
-            this.linkLabelBrowse.Location = new System.Drawing.Point(282, 53);
-            this.linkLabelBrowse.Name = "linkLabelBrowse";
-            this.linkLabelBrowse.Size = new System.Drawing.Size(59, 16);
-            this.linkLabelBrowse.TabIndex = 20;
-            this.linkLabelBrowse.TabStop = true;
-            this.linkLabelBrowse.Text = "Browse";
-            this.linkLabelBrowse.VisitedLinkColor = System.Drawing.Color.Black;
-            this.linkLabelBrowse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBrowse_LinkClicked);
             // 
             // linkLabelBrowseFile
             // 
@@ -1027,12 +937,323 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "Backup File Location";
             // 
+            // buttonRestore
+            // 
+            this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRestore.Enabled = false;
+            this.buttonRestore.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.buttonRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRestore.ForeColor = System.Drawing.Color.Green;
+            this.buttonRestore.Location = new System.Drawing.Point(221, 96);
+            this.buttonRestore.Name = "buttonRestore";
+            this.buttonRestore.Size = new System.Drawing.Size(120, 28);
+            this.buttonRestore.TabIndex = 0;
+            this.buttonRestore.Text = "Restore";
+            this.buttonRestore.UseVisualStyleBackColor = true;
+            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.linkLabelBrowse);
+            this.groupBox2.Controls.Add(this.labelBackupFileName);
+            this.groupBox2.Controls.Add(this.label22);
+            this.groupBox2.Controls.Add(this.textBoxBackupFolderLocation);
+            this.groupBox2.Controls.Add(this.buttonBackup);
+            this.groupBox2.Controls.Add(this.label28);
+            this.groupBox2.Location = new System.Drawing.Point(9, 41);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(347, 130);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Backup";
+            // 
+            // linkLabelBrowse
+            // 
+            this.linkLabelBrowse.ActiveLinkColor = System.Drawing.Color.Black;
+            this.linkLabelBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabelBrowse.AutoSize = true;
+            this.linkLabelBrowse.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabelBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkLabelBrowse.DisabledLinkColor = System.Drawing.Color.Black;
+            this.linkLabelBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelBrowse.ForeColor = System.Drawing.Color.Black;
+            this.linkLabelBrowse.LinkColor = System.Drawing.Color.Black;
+            this.linkLabelBrowse.Location = new System.Drawing.Point(282, 53);
+            this.linkLabelBrowse.Name = "linkLabelBrowse";
+            this.linkLabelBrowse.Size = new System.Drawing.Size(59, 16);
+            this.linkLabelBrowse.TabIndex = 20;
+            this.linkLabelBrowse.TabStop = true;
+            this.linkLabelBrowse.Text = "Browse";
+            this.linkLabelBrowse.VisitedLinkColor = System.Drawing.Color.Black;
+            this.linkLabelBrowse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBrowse_LinkClicked);
+            // 
+            // labelBackupFileName
+            // 
+            this.labelBackupFileName.AutoSize = true;
+            this.labelBackupFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBackupFileName.ForeColor = System.Drawing.Color.DarkOrange;
+            this.labelBackupFileName.Location = new System.Drawing.Point(142, 76);
+            this.labelBackupFileName.Name = "labelBackupFileName";
+            this.labelBackupFileName.Size = new System.Drawing.Size(13, 16);
+            this.labelBackupFileName.TabIndex = 17;
+            this.labelBackupFileName.Text = "-";
+            this.labelBackupFileName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(14, 76);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(126, 17);
+            this.label22.TabIndex = 19;
+            this.label22.Text = "Backup File Name:";
+            // 
+            // textBoxBackupFolderLocation
+            // 
+            this.textBoxBackupFolderLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxBackupFolderLocation.Location = new System.Drawing.Point(17, 50);
+            this.textBoxBackupFolderLocation.Name = "textBoxBackupFolderLocation";
+            this.textBoxBackupFolderLocation.ReadOnly = true;
+            this.textBoxBackupFolderLocation.Size = new System.Drawing.Size(264, 23);
+            this.textBoxBackupFolderLocation.TabIndex = 18;
+            // 
+            // buttonBackup
+            // 
+            this.buttonBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBackup.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.buttonBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBackup.ForeColor = System.Drawing.Color.Green;
+            this.buttonBackup.Location = new System.Drawing.Point(221, 95);
+            this.buttonBackup.Name = "buttonBackup";
+            this.buttonBackup.Size = new System.Drawing.Size(120, 28);
+            this.buttonBackup.TabIndex = 2;
+            this.buttonBackup.Text = "Backup";
+            this.buttonBackup.UseVisualStyleBackColor = true;
+            this.buttonBackup.Click += new System.EventHandler(this.buttonBackup_Click);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(14, 30);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(157, 17);
+            this.label28.TabIndex = 12;
+            this.label28.Text = "Backup Folder Location";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label29);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(365, 26);
+            this.panel4.TabIndex = 11;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(232, 5);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(128, 16);
+            this.label29.TabIndex = 10;
+            this.label29.Text = "Backup / Restore";
+            // 
+            // panelTheme
+            // 
+            this.panelTheme.BackColor = System.Drawing.Color.White;
+            this.panelTheme.Controls.Add(this.buttonThemeUpdate);
+            this.panelTheme.Controls.Add(this.label25);
+            this.panelTheme.Controls.Add(this.comboBoxTheme);
+            this.panelTheme.Controls.Add(this.groupBoxCustomTheme);
+            this.panelTheme.Controls.Add(this.panel5);
+            this.panelTheme.Controls.Add(this.label34);
+            this.panelTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelTheme.Location = new System.Drawing.Point(139, 45);
+            this.panelTheme.Name = "panelTheme";
+            this.panelTheme.Size = new System.Drawing.Size(376, 318);
+            this.panelTheme.TabIndex = 13;
+            this.panelTheme.Visible = false;
+            // 
+            // buttonThemeUpdate
+            // 
+            this.buttonThemeUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonThemeUpdate.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.buttonThemeUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonThemeUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonThemeUpdate.ForeColor = System.Drawing.Color.Green;
+            this.buttonThemeUpdate.Location = new System.Drawing.Point(289, 257);
+            this.buttonThemeUpdate.Name = "buttonThemeUpdate";
+            this.buttonThemeUpdate.Size = new System.Drawing.Size(69, 42);
+            this.buttonThemeUpdate.TabIndex = 2;
+            this.buttonThemeUpdate.Text = "Update";
+            this.buttonThemeUpdate.UseVisualStyleBackColor = true;
+            this.buttonThemeUpdate.Click += new System.EventHandler(this.buttonThemeUpdate_Click);
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Red;
+            this.label25.Location = new System.Drawing.Point(258, 30);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(114, 30);
+            this.label25.TabIndex = 17;
+            this.label25.Text = "This action will take effect at the next start";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // comboBoxTheme
+            // 
+            this.comboBoxTheme.DropDownHeight = 150;
+            this.comboBoxTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTheme.FormattingEnabled = true;
+            this.comboBoxTheme.IntegralHeight = false;
+            this.comboBoxTheme.ItemHeight = 16;
+            this.comboBoxTheme.Location = new System.Drawing.Point(82, 30);
+            this.comboBoxTheme.Name = "comboBoxTheme";
+            this.comboBoxTheme.Size = new System.Drawing.Size(171, 24);
+            this.comboBoxTheme.TabIndex = 1;
+            this.comboBoxTheme.SelectedIndexChanged += new System.EventHandler(this.comboBoxTheme_SelectedIndexChanged);
+            // 
+            // groupBoxCustomTheme
+            // 
+            this.groupBoxCustomTheme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCustomTheme.Controls.Add(this.buttonFontColor);
+            this.groupBoxCustomTheme.Controls.Add(this.buttonBodyColor);
+            this.groupBoxCustomTheme.Controls.Add(this.buttonButtonColor);
+            this.groupBoxCustomTheme.Controls.Add(this.buttonHeaderColor);
+            this.groupBoxCustomTheme.Controls.Add(this.panelThemeButtomPanel);
+            this.groupBoxCustomTheme.Controls.Add(this.panelThemeTopPanel);
+            this.groupBoxCustomTheme.Controls.Add(this.panelThemeBodyPanel);
+            this.groupBoxCustomTheme.Location = new System.Drawing.Point(9, 70);
+            this.groupBoxCustomTheme.Name = "groupBoxCustomTheme";
+            this.groupBoxCustomTheme.Size = new System.Drawing.Size(358, 207);
+            this.groupBoxCustomTheme.TabIndex = 2;
+            this.groupBoxCustomTheme.TabStop = false;
+            this.groupBoxCustomTheme.Text = "Custom Theme";
+            this.groupBoxCustomTheme.Visible = false;
+            // 
+            // buttonFontColor
+            // 
+            this.buttonFontColor.Location = new System.Drawing.Point(123, 81);
+            this.buttonFontColor.Name = "buttonFontColor";
+            this.buttonFontColor.Size = new System.Drawing.Size(98, 30);
+            this.buttonFontColor.TabIndex = 24;
+            this.buttonFontColor.Text = "Font Color";
+            this.buttonFontColor.UseVisualStyleBackColor = true;
+            this.buttonFontColor.Click += new System.EventHandler(this.buttonFontColor_Click);
+            // 
+            // buttonBodyColor
+            // 
+            this.buttonBodyColor.Location = new System.Drawing.Point(13, 81);
+            this.buttonBodyColor.Name = "buttonBodyColor";
+            this.buttonBodyColor.Size = new System.Drawing.Size(98, 30);
+            this.buttonBodyColor.TabIndex = 23;
+            this.buttonBodyColor.Text = "Body Color";
+            this.buttonBodyColor.UseVisualStyleBackColor = true;
+            this.buttonBodyColor.Click += new System.EventHandler(this.buttonBodyColor_Click);
+            // 
+            // buttonButtonColor
+            // 
+            this.buttonButtonColor.Location = new System.Drawing.Point(13, 170);
+            this.buttonButtonColor.Name = "buttonButtonColor";
+            this.buttonButtonColor.Size = new System.Drawing.Size(208, 30);
+            this.buttonButtonColor.TabIndex = 22;
+            this.buttonButtonColor.Text = "Buttom Color";
+            this.buttonButtonColor.UseVisualStyleBackColor = true;
+            this.buttonButtonColor.Click += new System.EventHandler(this.buttonButtonColor_Click);
+            // 
+            // buttonHeaderColor
+            // 
+            this.buttonHeaderColor.Location = new System.Drawing.Point(13, 20);
+            this.buttonHeaderColor.Name = "buttonHeaderColor";
+            this.buttonHeaderColor.Size = new System.Drawing.Size(208, 30);
+            this.buttonHeaderColor.TabIndex = 21;
+            this.buttonHeaderColor.Text = "Topbar Color";
+            this.buttonHeaderColor.UseVisualStyleBackColor = true;
+            this.buttonHeaderColor.Click += new System.EventHandler(this.buttonHeaderColor_Click);
+            // 
+            // panelThemeButtomPanel
+            // 
+            this.panelThemeButtomPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelThemeButtomPanel.BackColor = System.Drawing.Color.Silver;
+            this.panelThemeButtomPanel.Location = new System.Drawing.Point(227, 170);
+            this.panelThemeButtomPanel.Name = "panelThemeButtomPanel";
+            this.panelThemeButtomPanel.Size = new System.Drawing.Size(125, 28);
+            this.panelThemeButtomPanel.TabIndex = 19;
+            // 
+            // panelThemeTopPanel
+            // 
+            this.panelThemeTopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelThemeTopPanel.BackColor = System.Drawing.Color.Silver;
+            this.panelThemeTopPanel.Location = new System.Drawing.Point(227, 15);
+            this.panelThemeTopPanel.Name = "panelThemeTopPanel";
+            this.panelThemeTopPanel.Size = new System.Drawing.Size(125, 28);
+            this.panelThemeTopPanel.TabIndex = 18;
+            // 
+            // panelThemeBodyPanel
+            // 
+            this.panelThemeBodyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelThemeBodyPanel.BackColor = System.Drawing.Color.LightGray;
+            this.panelThemeBodyPanel.Controls.Add(this.labelBodyTextColor);
+            this.panelThemeBodyPanel.Location = new System.Drawing.Point(227, 39);
+            this.panelThemeBodyPanel.Name = "panelThemeBodyPanel";
+            this.panelThemeBodyPanel.Size = new System.Drawing.Size(125, 135);
+            this.panelThemeBodyPanel.TabIndex = 20;
+            // 
+            // labelBodyTextColor
+            // 
+            this.labelBodyTextColor.AutoSize = true;
+            this.labelBodyTextColor.BackColor = System.Drawing.Color.Transparent;
+            this.labelBodyTextColor.Location = new System.Drawing.Point(36, 59);
+            this.labelBodyTextColor.Name = "labelBodyTextColor";
+            this.labelBodyTextColor.Size = new System.Drawing.Size(52, 17);
+            this.labelBodyTextColor.TabIndex = 2;
+            this.labelBodyTextColor.Text = "Theme";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label33);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(376, 26);
+            this.panel5.TabIndex = 11;
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(315, 5);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(56, 16);
+            this.label33.TabIndex = 10;
+            this.label33.Text = "Theme";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(7, 34);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(52, 17);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "Theme";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(523, 437);
+            this.Controls.Add(this.panelTheme);
             this.Controls.Add(this.panelBackupRestore);
             this.Controls.Add(this.panelSetting);
             this.Controls.Add(this.panelReminder);
@@ -1057,12 +1278,14 @@
             this.panel1.PerformLayout();
             this.panelReminder.ResumeLayout(false);
             this.panelReminder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddCategory)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBoxCategory.ResumeLayout(false);
             this.groupBoxCategory.PerformLayout();
             this.groupBoxEvent.ResumeLayout(false);
             this.groupBoxEvent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteEvent)).EndInit();
             this.panelBackupRestore.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1070,8 +1293,13 @@
             this.groupBox2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddCategory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteEvent)).EndInit();
+            this.panelTheme.ResumeLayout(false);
+            this.panelTheme.PerformLayout();
+            this.groupBoxCustomTheme.ResumeLayout(false);
+            this.panelThemeBodyPanel.ResumeLayout(false);
+            this.panelThemeBodyPanel.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1156,6 +1384,23 @@
         private System.Windows.Forms.LinkLabel linkLabelBrowseFile;
         private System.Windows.Forms.TextBox textBoxBackupFIleLocation;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonTheme;
+        private System.Windows.Forms.Panel panelTheme;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.GroupBox groupBoxCustomTheme;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox comboBoxTheme;
+        private System.Windows.Forms.Panel panelThemeButtomPanel;
+        private System.Windows.Forms.Panel panelThemeTopPanel;
+        private System.Windows.Forms.Panel panelThemeBodyPanel;
+        private System.Windows.Forms.Button buttonHeaderColor;
+        private System.Windows.Forms.Button buttonFontColor;
+        private System.Windows.Forms.Button buttonBodyColor;
+        private System.Windows.Forms.Button buttonButtonColor;
+        private System.Windows.Forms.Button buttonThemeUpdate;
+        private System.Windows.Forms.Label labelBodyTextColor;
 
     }
 }

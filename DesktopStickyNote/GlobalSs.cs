@@ -15,12 +15,17 @@ namespace DesktopStickyNote
         
         //Settings
         public static bool AlwaysVisible = false;
-        public static Color FontColor = Color.Black;
         public static int RemainTimeHour = 0;
         public static int RemainTimeMinutes = 5;
         public static string RemainLaterItems;
         public static bool RemainTimerStop = false;
         public static Position CurrentPosition = Position.RightCenter;
+        public static Theme CurrentTheme = Theme.Default;
+
+        public static Color ThemeTopBarBackColor;
+        public static Color ThemeFooterBarBackColor;
+        public static Color ThemeBodyBackColor;
+        public static Color ThemeBodyTextColor;
 
         public enum Position
         {
@@ -33,6 +38,13 @@ namespace DesktopStickyNote
             RightTop = 7,
             RightCenter = 8,
             RightBottom = 9
+        }
+
+        public enum Theme
+        {
+            Default = 0,
+            Dark = 1,
+            Custom = 2
         }
 
         public static string[] Events { get; set; }
@@ -128,26 +140,14 @@ namespace DesktopStickyNote
     public class KeyVariables
     {
         // Properties
-        public string AlwaysVisible { get; set; }
-        public string Category { get; set; }
-        public string Font { get; set; }
-        public string FontColor { get; set; }
-        public string Events { get; set; }
-        public string Note { get; set; }
-        public string RemainTime { get; set; }
-        public string Position { get; set; }
+        internal string AlwaysVisible { get { return "AlwaysVisible"; } }
+        internal string Category { get { return "Category"; } }
+        internal string Font { get { return "Font"; } }
+        internal string Events { get { return "Events"; } }
+        internal string Note { get { return "Note"; } }
+        internal string RemainTime { get { return "RemainTime"; } }
+        internal string Position { get { return "Position"; } }
+        internal string Theme { get { return "Theme"; } }
 
-        // Constructor to initialize default values
-        public KeyVariables()
-        {
-            AlwaysVisible = "AlwaysVisible";
-            Category = "Category";
-            Font = "Font";
-            FontColor = "FontColor";
-            Events = "Events";
-            Note = "Note";
-            RemainTime = "RemainTime";
-            Position = "Position";
-        }
     }
 }
