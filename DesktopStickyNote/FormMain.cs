@@ -24,7 +24,11 @@ namespace DesktopStickyNote
             base.BackColor = GlobalSs.ThemeBodyBackColor;
             richTextBoxNote.BackColor = GlobalSs.ThemeBodyBackColor;
             richTextBoxNote.ForeColor = GlobalSs.ThemeBodyTextColor;
-            labelTotalEvents.ForeColor = GlobalSs.ThemeBodyTextColor;
+            linkLabelTotalEvent.ForeColor = GlobalSs.ThemeBodyTextColor;
+            linkLabelTotalEvent.LinkColor = GlobalSs.ThemeBodyTextColor;
+            linkLabelTotalEvent.ActiveLinkColor = GlobalSs.ThemeBodyTextColor;
+            linkLabelTotalEvent.VisitedLinkColor = GlobalSs.ThemeBodyTextColor;
+            linkLabelTotalEvent.DisabledLinkColor = GlobalSs.ThemeBodyTextColor;
 
             richTextBoxNote.Text = GlobalSs.GetValue(GlobalSs.KeyVariable.Note) ?? "";
             richTextBoxNote.Font = GlobalSs.GetFont();
@@ -202,8 +206,8 @@ namespace DesktopStickyNote
 
             if (GlobalSs.Events != null)
             {
-                labelTotalEvents.Text = @"Total Events " + GlobalSs.Events.Length;
-                labelTotalEvents.Refresh();
+                linkLabelTotalEvent.Text = @"Total Events " + GlobalSs.Events.Length;
+                linkLabelTotalEvent.Refresh();
 
                 var remainder=new string[0];
                 
@@ -246,10 +250,15 @@ namespace DesktopStickyNote
             }
             else
             {
-                labelTotalEvents.Text = @"Total Events 0";
-                labelTotalEvents.Refresh();
+                linkLabelTotalEvent.Text = @"Total Events 0";
+                linkLabelTotalEvent.Refresh();
             }
 
+        }
+
+        private void linkLabelTotalEvent_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new FormSettings(true).ShowDialog();
         }
 
     }

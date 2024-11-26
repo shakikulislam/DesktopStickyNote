@@ -34,10 +34,10 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
             this.panelFooter = new System.Windows.Forms.Panel();
-            this.labelTotalEvents = new System.Windows.Forms.Label();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
             this.timerRemainder = new System.Windows.Forms.Timer(this.components);
+            this.linkLabelTotalEvent = new System.Windows.Forms.LinkLabel();
             this.panelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
@@ -86,7 +86,7 @@
             // panelFooter
             // 
             this.panelFooter.BackColor = System.Drawing.Color.LightGray;
-            this.panelFooter.Controls.Add(this.labelTotalEvents);
+            this.panelFooter.Controls.Add(this.linkLabelTotalEvent);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelFooter.Location = new System.Drawing.Point(0, 378);
             this.panelFooter.Name = "panelFooter";
@@ -94,16 +94,6 @@
             this.panelFooter.TabIndex = 1;
             this.panelFooter.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
             this.panelFooter.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
-            // 
-            // labelTotalEvents
-            // 
-            this.labelTotalEvents.AutoSize = true;
-            this.labelTotalEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalEvents.Location = new System.Drawing.Point(6, 5);
-            this.labelTotalEvents.Name = "labelTotalEvents";
-            this.labelTotalEvents.Size = new System.Drawing.Size(107, 16);
-            this.labelTotalEvents.TabIndex = 0;
-            this.labelTotalEvents.Text = "Total Events 0";
             // 
             // richTextBoxNote
             // 
@@ -128,6 +118,20 @@
             this.timerRemainder.Enabled = true;
             this.timerRemainder.Interval = 1000;
             this.timerRemainder.Tick += new System.EventHandler(this.timerRemainder_Tick);
+            // 
+            // linkLabelTotalEvent
+            // 
+            this.linkLabelTotalEvent.AutoSize = true;
+            this.linkLabelTotalEvent.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkLabelTotalEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelTotalEvent.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkLabelTotalEvent.Location = new System.Drawing.Point(5, 5);
+            this.linkLabelTotalEvent.Name = "linkLabelTotalEvent";
+            this.linkLabelTotalEvent.Size = new System.Drawing.Size(93, 16);
+            this.linkLabelTotalEvent.TabIndex = 0;
+            this.linkLabelTotalEvent.TabStop = true;
+            this.linkLabelTotalEvent.Text = "Total Events 0";
+            this.linkLabelTotalEvent.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTotalEvent_LinkClicked);
             // 
             // FormMain
             // 
@@ -162,9 +166,9 @@
         private System.Windows.Forms.PictureBox pictureBoxSettings;
         private System.Windows.Forms.ToolTip toolTipMain;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
-        private System.Windows.Forms.Label labelTotalEvents;
         private System.Windows.Forms.Timer timerRemainder;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.LinkLabel linkLabelTotalEvent;
     }
 }
 

@@ -15,11 +15,14 @@ namespace DesktopStickyNote
         private string _categories;
         private string _dateFormat = "dd-MMM-yy HH:mm:ss";
         private string _events;
+        private bool _showEventPanel;
 
-        public FormSettings()
+        public FormSettings(bool showEventPanel=false)
         {
             InitializeComponent();
             this.Icon = new FormMain().Icon;
+
+            _showEventPanel = showEventPanel;
         }
 
         private string PositionNameFormat(string name)
@@ -580,7 +583,14 @@ namespace DesktopStickyNote
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            buttonSettings.PerformClick();
+            if (_showEventPanel)
+            {
+                buttonReminder.PerformClick();
+            }
+            else
+            {
+                buttonSettings.PerformClick();
+            }
         }
 
         private void buttonBackupRestore_Click(object sender, EventArgs e)
