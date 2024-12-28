@@ -34,10 +34,10 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
             this.panelFooter = new System.Windows.Forms.Panel();
+            this.linkLabelTotalEvent = new System.Windows.Forms.LinkLabel();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
             this.timerRemainder = new System.Windows.Forms.Timer(this.components);
-            this.linkLabelTotalEvent = new System.Windows.Forms.LinkLabel();
             this.panelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
@@ -95,30 +95,6 @@
             this.panelFooter.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
             this.panelFooter.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
             // 
-            // richTextBoxNote
-            // 
-            this.richTextBoxNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxNote.BackColor = System.Drawing.SystemColors.Menu;
-            this.richTextBoxNote.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxNote.Location = new System.Drawing.Point(6, 46);
-            this.richTextBoxNote.Name = "richTextBoxNote";
-            this.richTextBoxNote.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxNote.Size = new System.Drawing.Size(208, 326);
-            this.richTextBoxNote.TabIndex = 2;
-            this.richTextBoxNote.Text = "";
-            this.richTextBoxNote.TextChanged += new System.EventHandler(this.richTextBoxNote_TextChanged);
-            this.richTextBoxNote.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
-            this.richTextBoxNote.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
-            // 
-            // timerRemainder
-            // 
-            this.timerRemainder.Enabled = true;
-            this.timerRemainder.Interval = 1000;
-            this.timerRemainder.Tick += new System.EventHandler(this.timerRemainder_Tick);
-            // 
             // linkLabelTotalEvent
             // 
             this.linkLabelTotalEvent.AutoSize = true;
@@ -132,6 +108,30 @@
             this.linkLabelTotalEvent.TabStop = true;
             this.linkLabelTotalEvent.Text = "Total Events 0";
             this.linkLabelTotalEvent.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTotalEvent_LinkClicked);
+            // 
+            // richTextBoxNote
+            // 
+            this.richTextBoxNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxNote.BackColor = System.Drawing.SystemColors.Menu;
+            this.richTextBoxNote.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxNote.Location = new System.Drawing.Point(6, 46);
+            this.richTextBoxNote.Name = "richTextBoxNote";
+            this.richTextBoxNote.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.richTextBoxNote.Size = new System.Drawing.Size(231, 326);
+            this.richTextBoxNote.TabIndex = 2;
+            this.richTextBoxNote.Text = "";
+            this.richTextBoxNote.TextChanged += new System.EventHandler(this.richTextBoxNote_TextChanged);
+            this.richTextBoxNote.MouseLeave += new System.EventHandler(this.FormMain_MouseLeave);
+            this.richTextBoxNote.MouseHover += new System.EventHandler(this.FormMain_MouseHover);
+            // 
+            // timerRemainder
+            // 
+            this.timerRemainder.Enabled = true;
+            this.timerRemainder.Interval = 1000;
+            this.timerRemainder.Tick += new System.EventHandler(this.timerRemainder_Tick);
             // 
             // FormMain
             // 
