@@ -609,7 +609,12 @@ namespace DesktopStickyNote
             {
                 if (fbd.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    textBoxBackupFolderLocation.Text = fbd.SelectedPath + @"\";
+                    var selectedPath = fbd.SelectedPath;
+                    if (selectedPath.Length==3)
+                    {
+                        selectedPath = selectedPath.Substring(0, 2);
+                    }
+                    textBoxBackupFolderLocation.Text = selectedPath + @"\";
                 }
             }
         }
@@ -626,7 +631,7 @@ namespace DesktopStickyNote
 
                 var currentDate = DateTime.Now;
                 var fileName = @"DSN_" + currentDate.Year + "" + currentDate.Month + "" + currentDate.Day + "_" +
-                               currentDate.Hour + "" + currentDate.Minute + "" + currentDate.Second + ".bac";
+                               currentDate.Hour + "" + currentDate.Minute + "" + currentDate.Second + ".sdsn";
                 linkLabelBackupFileName.Text = fileName;
                 var filePath = textBoxBackupFolderLocation.Text.Trim() + @"DSN_Backup";
 
@@ -634,8 +639,6 @@ namespace DesktopStickyNote
                 {
                     Directory.CreateDirectory(filePath);
                 }
-
-                
 
                 var keyVariables = typeof(KeyVariables).GetFields();
                 var backupString = new StringBuilder();
@@ -656,6 +659,9 @@ namespace DesktopStickyNote
                 File.WriteAllText(filePath + @"\" + fileName, backupString.ToString());
                 MessageBox.Show(@"Backup completed successfully.");
 
+                Settings.Default.LastBackupLocation = filePath;
+                Settings.Default.Save();
+
             }
             catch (Exception ex)
             {
@@ -669,10 +675,12 @@ namespace DesktopStickyNote
         {
             try
             {
+
                 using (var ofd = new OpenFileDialog())
                 {
-                    ofd.Title = @"Select a DSK Backup File";
-                    ofd.Filter = @"Backup files (*.bac)|*.bac";
+                    ofd.Title = @"Select a DSN Backup File";
+                    ofd.Filter = @"DSN Backup files (*.sdsn)|*.sdsn";
+                    ofd.InitialDirectory = Settings.Default.LastBackupLocation;
 
                     if (ofd.ShowDialog() == DialogResult.OK)
                     {
@@ -833,12 +841,10 @@ namespace DesktopStickyNote
 
         private void linkLabelBackupFileName_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var folderPath = Path.Combine(textBoxBackupFolderLocation.Text.Trim(), "DSN_Backup");
+            var folderPath = Settings.Default.LastBackupLocation;
 
-            // Check if the folder exists
             if (Directory.Exists(folderPath))
             {
-                // Open the folder using File Explorer
                 Process.Start("explorer.exe", folderPath);
             }
             else

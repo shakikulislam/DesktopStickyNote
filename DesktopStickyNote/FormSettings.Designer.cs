@@ -100,6 +100,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.buttonRestore = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabelBackupFileName = new System.Windows.Forms.LinkLabel();
             this.linkLabelBrowse = new System.Windows.Forms.LinkLabel();
             this.label22 = new System.Windows.Forms.Label();
             this.textBoxBackupFolderLocation = new System.Windows.Forms.TextBox();
@@ -123,7 +124,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.linkLabelBackupFileName = new System.Windows.Forms.LinkLabel();
             this.panelSideMenu.SuspendLayout();
             this.panelSetting.SuspendLayout();
             this.groupBoxFont.SuspendLayout();
@@ -877,9 +877,9 @@
             this.panelBackupRestore.Controls.Add(this.groupBox2);
             this.panelBackupRestore.Controls.Add(this.panel4);
             this.panelBackupRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelBackupRestore.Location = new System.Drawing.Point(147, 401);
+            this.panelBackupRestore.Location = new System.Drawing.Point(147, 64);
             this.panelBackupRestore.Name = "panelBackupRestore";
-            this.panelBackupRestore.Size = new System.Drawing.Size(365, 30);
+            this.panelBackupRestore.Size = new System.Drawing.Size(365, 367);
             this.panelBackupRestore.TabIndex = 12;
             this.panelBackupRestore.Visible = false;
             // 
@@ -969,6 +969,17 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Backup";
+            // 
+            // linkLabelBackupFileName
+            // 
+            this.linkLabelBackupFileName.AutoSize = true;
+            this.linkLabelBackupFileName.Location = new System.Drawing.Point(140, 76);
+            this.linkLabelBackupFileName.Name = "linkLabelBackupFileName";
+            this.linkLabelBackupFileName.Size = new System.Drawing.Size(91, 17);
+            this.linkLabelBackupFileName.TabIndex = 21;
+            this.linkLabelBackupFileName.TabStop = true;
+            this.linkLabelBackupFileName.Text = "DSK_Backup";
+            this.linkLabelBackupFileName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBackupFileName_LinkClicked);
             // 
             // linkLabelBrowse
             // 
@@ -1234,17 +1245,6 @@
             this.label34.Size = new System.Drawing.Size(52, 17);
             this.label34.TabIndex = 1;
             this.label34.Text = "Theme";
-            // 
-            // linkLabelBackupFileName
-            // 
-            this.linkLabelBackupFileName.AutoSize = true;
-            this.linkLabelBackupFileName.Location = new System.Drawing.Point(140, 76);
-            this.linkLabelBackupFileName.Name = "linkLabelBackupFileName";
-            this.linkLabelBackupFileName.Size = new System.Drawing.Size(91, 17);
-            this.linkLabelBackupFileName.TabIndex = 21;
-            this.linkLabelBackupFileName.TabStop = true;
-            this.linkLabelBackupFileName.Text = "DSK_Backup";
-            this.linkLabelBackupFileName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBackupFileName_LinkClicked);
             // 
             // FormSettings
             // 
