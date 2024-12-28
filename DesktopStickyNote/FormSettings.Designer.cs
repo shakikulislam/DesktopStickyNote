@@ -101,7 +101,6 @@
             this.buttonRestore = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.linkLabelBrowse = new System.Windows.Forms.LinkLabel();
-            this.labelBackupFileName = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.textBoxBackupFolderLocation = new System.Windows.Forms.TextBox();
             this.buttonBackup = new System.Windows.Forms.Button();
@@ -124,6 +123,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
+            this.linkLabelBackupFileName = new System.Windows.Forms.LinkLabel();
             this.panelSideMenu.SuspendLayout();
             this.panelSetting.SuspendLayout();
             this.groupBoxFont.SuspendLayout();
@@ -957,8 +957,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.linkLabelBackupFileName);
             this.groupBox2.Controls.Add(this.linkLabelBrowse);
-            this.groupBox2.Controls.Add(this.labelBackupFileName);
             this.groupBox2.Controls.Add(this.label22);
             this.groupBox2.Controls.Add(this.textBoxBackupFolderLocation);
             this.groupBox2.Controls.Add(this.buttonBackup);
@@ -989,18 +989,6 @@
             this.linkLabelBrowse.Text = "Browse";
             this.linkLabelBrowse.VisitedLinkColor = System.Drawing.Color.Black;
             this.linkLabelBrowse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBrowse_LinkClicked);
-            // 
-            // labelBackupFileName
-            // 
-            this.labelBackupFileName.AutoSize = true;
-            this.labelBackupFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBackupFileName.ForeColor = System.Drawing.Color.DarkOrange;
-            this.labelBackupFileName.Location = new System.Drawing.Point(142, 76);
-            this.labelBackupFileName.Name = "labelBackupFileName";
-            this.labelBackupFileName.Size = new System.Drawing.Size(13, 16);
-            this.labelBackupFileName.TabIndex = 17;
-            this.labelBackupFileName.Text = "-";
-            this.labelBackupFileName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label22
             // 
@@ -1077,7 +1065,7 @@
             this.panelTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelTheme.Location = new System.Drawing.Point(139, 45);
             this.panelTheme.Name = "panelTheme";
-            this.panelTheme.Size = new System.Drawing.Size(376, 318);
+            this.panelTheme.Size = new System.Drawing.Size(376, 20);
             this.panelTheme.TabIndex = 13;
             this.panelTheme.Visible = false;
             // 
@@ -1088,7 +1076,7 @@
             this.buttonThemeUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonThemeUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonThemeUpdate.ForeColor = System.Drawing.Color.Green;
-            this.buttonThemeUpdate.Location = new System.Drawing.Point(289, 257);
+            this.buttonThemeUpdate.Location = new System.Drawing.Point(289, -41);
             this.buttonThemeUpdate.Name = "buttonThemeUpdate";
             this.buttonThemeUpdate.Size = new System.Drawing.Size(69, 42);
             this.buttonThemeUpdate.TabIndex = 2;
@@ -1247,6 +1235,17 @@
             this.label34.TabIndex = 1;
             this.label34.Text = "Theme";
             // 
+            // linkLabelBackupFileName
+            // 
+            this.linkLabelBackupFileName.AutoSize = true;
+            this.linkLabelBackupFileName.Location = new System.Drawing.Point(140, 76);
+            this.linkLabelBackupFileName.Name = "linkLabelBackupFileName";
+            this.linkLabelBackupFileName.Size = new System.Drawing.Size(91, 17);
+            this.linkLabelBackupFileName.TabIndex = 21;
+            this.linkLabelBackupFileName.TabStop = true;
+            this.linkLabelBackupFileName.Text = "DSK_Backup";
+            this.linkLabelBackupFileName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBackupFileName_LinkClicked);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1374,7 +1373,6 @@
         private System.Windows.Forms.Button buttonRestore;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonBackup;
-        private System.Windows.Forms.Label labelBackupFileName;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label29;
@@ -1401,6 +1399,7 @@
         private System.Windows.Forms.Button buttonButtonColor;
         private System.Windows.Forms.Button buttonThemeUpdate;
         private System.Windows.Forms.Label labelBodyTextColor;
+        private System.Windows.Forms.LinkLabel linkLabelBackupFileName;
 
     }
 }

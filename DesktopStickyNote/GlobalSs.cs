@@ -140,14 +140,14 @@ namespace DesktopStickyNote
     public class KeyVariables
     {
         // Properties
-        internal string AlwaysVisible { get { return "AlwaysVisible"; } }
-        internal string Category { get { return "Category"; } }
-        internal string Font { get { return "Font"; } }
-        internal string Events { get { return "Events"; } }
-        internal string Note { get { return "Note"; } }
-        internal string RemainTime { get { return "RemainTime"; } }
-        internal string Position { get { return "Position"; } }
-        internal string Theme { get { return "Theme"; } }
+        public string AlwaysVisible = "AlwaysVisible";
+        public string Category = "Category";
+        public string Font = "Font";
+        public string Events = "Events";
+        public string Note = "Note";
+        public string RemainTime = "RemainTime";
+        public string Position = "Position";
+        public string Theme = "Theme";
 
     }
 }

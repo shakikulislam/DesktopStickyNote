@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DesktopStickyNote.Properties;
 using DesktopStickyNote.ThemeDetails;
+using System.Diagnostics;
 
 namespace DesktopStickyNote
 {
@@ -597,6 +598,9 @@ namespace DesktopStickyNote
         {
             ActiveSection.ActiveButton(sender, panelSideMenu);
             ShowForm(panelBackupRestore);
+
+            textBoxBackupFolderLocation.Text = Application.StartupPath + @"\";
+            linkLabelBackupFileName.Text = string.Empty;
         }
         
         private void linkLabelBrowse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -623,10 +627,17 @@ namespace DesktopStickyNote
                 var currentDate = DateTime.Now;
                 var fileName = @"DSN_" + currentDate.Year + "" + currentDate.Month + "" + currentDate.Day + "_" +
                                currentDate.Hour + "" + currentDate.Minute + "" + currentDate.Second + ".bac";
-                labelBackupFileName.Text = fileName;
-                var filePath = textBoxBackupFolderLocation.Text.Trim() + fileName;
+                linkLabelBackupFileName.Text = fileName;
+                var filePath = textBoxBackupFolderLocation.Text.Trim() + @"DSN_Backup";
 
-                var keyVariables = typeof(KeyVariables).GetProperties();
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
+                
+
+                var keyVariables = typeof(KeyVariables).GetFields();
                 var backupString = new StringBuilder();
 
                 foreach (var property in keyVariables)
@@ -642,8 +653,9 @@ namespace DesktopStickyNote
                     }
                 }
 
-                File.WriteAllText(filePath, backupString.ToString());
+                File.WriteAllText(filePath + @"\" + fileName, backupString.ToString());
                 MessageBox.Show(@"Backup completed successfully.");
+
             }
             catch (Exception ex)
             {
@@ -817,6 +829,22 @@ namespace DesktopStickyNote
             GlobalSs.SetValue(GlobalSs.KeyVariable.Theme, themeDetails);
 
             MessageBox.Show(@"The theme has been successfully updated.", @"Theme Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void linkLabelBackupFileName_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var folderPath = Path.Combine(textBoxBackupFolderLocation.Text.Trim(), "DSN_Backup");
+
+            // Check if the folder exists
+            if (Directory.Exists(folderPath))
+            {
+                // Open the folder using File Explorer
+                Process.Start("explorer.exe", folderPath);
+            }
+            else
+            {
+                MessageBox.Show(@"Backup folder does not exist.");
+            }
         }
     }
 }
