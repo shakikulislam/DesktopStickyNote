@@ -8,6 +8,7 @@ namespace DesktopStickyNote
     public partial class FormAlert : Form
     {
         private string _id;
+        private string _eventDateTime;
         private bool _isMouseDown;
         private Point _lastMouseLocation;
 
@@ -17,9 +18,11 @@ namespace DesktopStickyNote
             this.Icon = new FormMain().Icon;
 
             _id = singleEvent[0];
+            _eventDateTime = Convert.ToDateTime(singleEvent[2]).ToString("dd-MMM-yy");
             labelCategory.Text = singleEvent[1];
             richTextBoxMessage.Text = singleEvent[4];
-            labelToDate.Text = Convert.ToDateTime(singleEvent[3]).ToString("dd-MMM-yy");
+            labelEventDate.Text = _eventDateTime;
+            linkLabelNextDay.Text = @"Set Next Day (" + (DateTime.Today.AddDays(1)).ToString("dd-MMM") + @") Remain";
 
             var hour = GlobalSs.RemainTimeHour;
             var minute = GlobalSs.RemainTimeMinutes;
@@ -81,8 +84,29 @@ namespace DesktopStickyNote
             GlobalSs.RemainTimerStop = false;
             Close();
         }
+        
+        private void labelCategory_MouseDown(object sender, MouseEventArgs e)
+        {
+            _isMouseDown = true;
+            _lastMouseLocation = e.Location;
+        }
 
-        private void buttonDone_Click(object sender, EventArgs e)
+        private void labelCategory_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isMouseDown)
+            {
+                int x = e.X - _lastMouseLocation.X;
+                int y = e.Y - _lastMouseLocation.Y;
+                Location = new Point(Location.X + x, Location.Y + y);
+            }
+        }
+
+        private void labelCategory_MouseUp(object sender, MouseEventArgs e)
+        {
+            _isMouseDown = false;
+        }
+
+        private void linkLabelRemoveEvent_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (MessageBox.Show(@"Are you sure! Remove this EVENT", @"Confirmation", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) != DialogResult.Yes) return;
@@ -121,26 +145,55 @@ namespace DesktopStickyNote
             GlobalSs.RemainTimerStop = false;
             Close();
         }
-
-        private void labelCategory_MouseDown(object sender, MouseEventArgs e)
+        
+        private void linkLabelNextDay_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            _isMouseDown = true;
-            _lastMouseLocation = e.Location;
-        }
+            var nextDay = DateTime.Today.AddDays(1);
+            var remainingDate = new DateTime(nextDay.Year, nextDay.Month, nextDay.Day, 0, 0, 0);
+            var remainderIdItems = GlobalSs.RemainLaterItems;
+            var remainDate = nextDay.ToShortDateString();
 
-        private void labelCategory_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_isMouseDown)
+            if (Convert.ToDateTime(remainDate) > Convert.ToDateTime(_eventDateTime))
             {
-                int x = e.X - _lastMouseLocation.X;
-                int y = e.Y - _lastMouseLocation.Y;
-                Location = new Point(Location.X + x, Location.Y + y);
+                MessageBox.Show(@"It is not possible to set the remain date for the next day because the event date would be shorter than the remain date.");
+                return;
             }
-        }
 
-        private void labelCategory_MouseUp(object sender, MouseEventArgs e)
-        {
-            _isMouseDown = false;
+            if (remainderIdItems != null)
+            {
+                var remainLaterIds = remainderIdItems.Split('|').ToList();
+                var isFind = false;
+
+                for (int i = 0; i < remainLaterIds.Count; i++)
+                {
+                    var remainItem = remainLaterIds[i].Split(',');
+
+                    if (remainItem[0] == _id)
+                    {
+                        remainItem[1] = remainingDate.ToString("");
+
+                        remainLaterIds[i] = string.Join(",", remainItem);
+                        isFind = true;
+                        break;
+                    }
+                }
+
+                if (isFind)
+                {
+                    GlobalSs.RemainLaterItems = string.Join("|", remainLaterIds);
+                }
+                else
+                {
+                    GlobalSs.RemainLaterItems = GlobalSs.RemainLaterItems + "|" + _id + "," + remainingDate;
+                }
+            }
+            else
+            {
+                GlobalSs.RemainLaterItems = _id + "," + remainingDate;
+            }
+
+            GlobalSs.RemainTimerStop = false;
+            Close();
         }
 
 

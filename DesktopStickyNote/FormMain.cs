@@ -222,8 +222,8 @@ namespace DesktopStickyNote
                 foreach (var events in GlobalSs.Events)
                 {
                     var @event = events.Split('~');
-                    var toDate = Convert.ToDateTime(@event[2]);
-                    if (today >= toDate)
+                    var eventDate = Convert.ToDateTime(@event[3]);
+                    if (today >= eventDate)
                     {
                         var showForm = true;
                         foreach (var item in remainder)

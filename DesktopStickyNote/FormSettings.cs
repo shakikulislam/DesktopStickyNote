@@ -212,11 +212,11 @@ namespace DesktopStickyNote
             ActiveSection.ActiveButton(sender, panelSideMenu);
             ShowForm(panelReminder);
 
-            dateTimePickerFrom.Format = DateTimePickerFormat.Custom;
-            dateTimePickerFrom.CustomFormat = _dateFormat;
+            dateTimePickerAlertFrom.Format = DateTimePickerFormat.Custom;
+            dateTimePickerAlertFrom.CustomFormat = _dateFormat;
 
-            dateTimePickerTo.Format = DateTimePickerFormat.Custom;
-            dateTimePickerTo.CustomFormat = _dateFormat;
+            dateTimeEventDate.Format = DateTimePickerFormat.Custom;
+            dateTimeEventDate.CustomFormat = _dateFormat;
 
             groupBoxCategory.Location = new Point(10, 70);
             groupBoxCategory.Size = new Size(370, 180);
@@ -357,7 +357,7 @@ namespace DesktopStickyNote
                 return;
             }
 
-            if (dateTimePickerFrom.Value > dateTimePickerTo.Value)
+            if (dateTimePickerAlertFrom.Value > dateTimeEventDate.Value)
             {
                 MessageBox.Show(@"Invalid Date Range", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -365,8 +365,8 @@ namespace DesktopStickyNote
 
 
             var category = comboBoxCaregory.Text;
-            var fromDate = dateTimePickerFrom.Value;
-            var toDate = dateTimePickerTo.Value;
+            var eventDate = dateTimeEventDate.Value;
+            var alertFromDate = dateTimePickerAlertFrom.Value;
             var details = string.IsNullOrEmpty(richTextBoxDetails.Text.Trim())
                 ? "No Details"
                 : richTextBoxDetails.Text.Trim();
@@ -377,7 +377,7 @@ namespace DesktopStickyNote
                 var date = DateTime.Now;
                 var id =  date.Year.ToString().Substring(2) + "" + date.Month + "" + date.Day + "" + date.Hour + "" + date.Minute + "" + date.Second;
 
-                var newEvent = id + "~" + category + "~" + fromDate + "~" + toDate + "~" + details;
+                var newEvent = id + "~" + category + "~" + eventDate + "~" + alertFromDate + "~" + details;
             
                 var allEvents = string.IsNullOrEmpty(_events) ? newEvent : _events + "|" + newEvent;
 
@@ -404,8 +404,8 @@ namespace DesktopStickyNote
                     {
                         // Update the event with new details
                         eventItems[1] = category;
-                        eventItems[2] = fromDate + "";
-                        eventItems[3] = toDate + "";
+                        eventItems[2] = eventDate + "";
+                        eventItems[3] = alertFromDate + "";
                         eventItems[4] = details;
 
                         // Rebuild the updated event string
@@ -435,8 +435,8 @@ namespace DesktopStickyNote
                 labelRemainder.Tag = lv[0].SubItems[columnHeaderId.Index].Text;
                 comboBoxCaregory.Text = lv[0].SubItems[columnHeaderCategory.Index].Text;
                 richTextBoxDetails.Text = lv[0].SubItems[columnHeaderDetails.Index].Text;
-                dateTimePickerFrom.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderFromDateFull.Index].Text);
-                dateTimePickerTo.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderToDateFull.Index].Text);
+                dateTimeEventDate.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderEventDateFull.Index].Text);
+                dateTimePickerAlertFrom.Value = Convert.ToDateTime(lv[0].SubItems[columnHeaderAlertFromDateFull.Index].Text);
 
                 groupBoxEvent.Text = @"Update/Delete Event";
             }
@@ -446,8 +446,8 @@ namespace DesktopStickyNote
         {
             labelRemainder.Tag = "";
             richTextBoxDetails.Clear();
-            dateTimePickerFrom.Value = DateTime.Today;
-            dateTimePickerTo.Value = DateTime.Today;
+            dateTimePickerAlertFrom.Value = DateTime.Today;
+            dateTimeEventDate.Value = DateTime.Today;
 
             buttonAddEvent.Size = new Size(100, 54);
             buttonAddEvent.Text = @"Add Event";
