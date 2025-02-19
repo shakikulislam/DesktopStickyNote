@@ -30,6 +30,14 @@ namespace DesktopStickyNote
             var showMinute = minute < 10 ? "0" + minute : minute.ToString();
             labelRemainAfter.Text = @"Next alert after " + showHour + @"." + showMinute + @" hour";
 
+            if (DateTime.Now>Convert.ToDateTime(singleEvent[2]))
+            {
+                panelBarTop.BackColor = Color.Red;
+                panelBarRight.BackColor = Color.Red;
+                panelBarButtom.BackColor = Color.Red;
+                panelBarLeft.BackColor = Color.Red;
+            }
+
             GlobalSs.RemainTimerStop = true;
         }
 
