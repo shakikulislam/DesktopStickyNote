@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DesktopStickyNote
@@ -15,6 +17,8 @@ namespace DesktopStickyNote
         private int _formHeight;
         private int _formWidth;
 
+        public static List<HorizontalAlignment> LineAlignments = new List<HorizontalAlignment>();
+        
         public FormMain()
         {
             InitializeComponent();
@@ -33,8 +37,77 @@ namespace DesktopStickyNote
             richTextBoxNote.Text = GlobalSs.GetValue(GlobalSs.KeyVariable.Note) ?? "";
             richTextBoxNote.Font = GlobalSs.GetFont();
             
+            LoadLineAlignments();
+            ApplyLineAlignments();
+
             ViewSticky(true);
         }
+
+        public static void LoadLineAlignments()
+        {
+            var alignmentString = GlobalSs.GetValue(GlobalSs.KeyVariable.TextAlignment);
+            if (!string.IsNullOrEmpty(alignmentString))
+            {
+                LineAlignments = alignmentString
+                    .Split(',')
+                    .Select(a => (HorizontalAlignment)Enum.Parse(typeof(HorizontalAlignment), a))
+                    .ToList();
+            }
+            else
+            {
+                LineAlignments.Clear();
+            }
+        }
+
+        private void ApplyLineAlignments()
+        {
+            var lineCount = richTextBoxNote.Lines.Length;
+
+            while (LineAlignments.Count < lineCount)
+            {
+                LineAlignments.Add(HorizontalAlignment.Left);
+            }
+
+            for (var i = 0; i < lineCount; i++)
+            {
+                var lineStartIndex = richTextBoxNote.GetFirstCharIndexFromLine(i);
+                var lineEndIndex = (i + 1 < lineCount) ? richTextBoxNote.GetFirstCharIndexFromLine(i + 1) - 1 : richTextBoxNote.TextLength;
+
+                richTextBoxNote.Select(lineStartIndex, lineEndIndex - lineStartIndex);
+                richTextBoxNote.SelectionAlignment = LineAlignments[i];
+            }
+        }
+
+        private void SaveAlignment()
+        {
+            string alignmentString = string.Join(",", LineAlignments.Select(a => a.ToString()));
+            GlobalSs.SetValue(GlobalSs.KeyVariable.TextAlignment, alignmentString);
+        }
+
+        private void TextAlign(HorizontalAlignment alignment)
+        {
+            int startLine = richTextBoxNote.GetLineFromCharIndex(richTextBoxNote.SelectionStart);
+            var selectedText = richTextBoxNote.SelectedText.Split('\n');
+            var endLine = startLine + selectedText.Length - 1;
+
+            int lineCount = richTextBoxNote.Lines.Length;
+
+            while (LineAlignments.Count < lineCount)
+            {
+                LineAlignments.Add(HorizontalAlignment.Left);
+            }
+
+            for (var i = startLine; i <= endLine; i++)
+            {
+                LineAlignments[i] = alignment;
+            }
+
+            richTextBoxNote.SelectionAlignment = alignment;
+            
+            SaveAlignment();
+
+        }
+
 
         private void ViewSticky(bool loadTime = false, bool mouseHover = false)
         {
@@ -193,6 +266,7 @@ namespace DesktopStickyNote
         private void richTextBoxNote_TextChanged(object sender, EventArgs e)
         {
             GlobalSs.SetValue(GlobalSs.KeyVariable.Note, richTextBoxNote.Text.Trim());
+            SaveAlignment();
         }
 
         private void pictureBoxSettings_Click(object sender, EventArgs e)
@@ -259,6 +333,21 @@ namespace DesktopStickyNote
         private void linkLabelTotalEvent_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new FormSettings(true).ShowDialog();
+        }
+        
+        private void leftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextAlign(HorizontalAlignment.Left);
+        }
+
+        private void centerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextAlign(HorizontalAlignment.Center);
+        }
+
+        private void rightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextAlign(HorizontalAlignment.Right);
         }
 
     }

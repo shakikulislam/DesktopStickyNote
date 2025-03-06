@@ -38,10 +38,16 @@
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
             this.timerRemainder = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.textAlignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.centerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.panelFooter.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitleBar
@@ -116,6 +122,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxNote.BackColor = System.Drawing.SystemColors.Menu;
             this.richTextBoxNote.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxNote.ContextMenuStrip = this.contextMenuStrip1;
             this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxNote.Location = new System.Drawing.Point(6, 46);
             this.richTextBoxNote.Name = "richTextBoxNote";
@@ -132,6 +139,47 @@
             this.timerRemainder.Enabled = true;
             this.timerRemainder.Interval = 1000;
             this.timerRemainder.Tick += new System.EventHandler(this.timerRemainder_Tick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.textAlignToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // textAlignToolStripMenuItem
+            // 
+            this.textAlignToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.leftToolStripMenuItem,
+            this.centerToolStripMenuItem,
+            this.rightToolStripMenuItem});
+            this.textAlignToolStripMenuItem.Name = "textAlignToolStripMenuItem";
+            this.textAlignToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.textAlignToolStripMenuItem.Text = "Text Align";
+            // 
+            // leftToolStripMenuItem
+            // 
+            this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
+            this.leftToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.leftToolStripMenuItem.Text = "Left";
+            this.leftToolStripMenuItem.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
+            // 
+            // centerToolStripMenuItem
+            // 
+            this.centerToolStripMenuItem.Name = "centerToolStripMenuItem";
+            this.centerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.centerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.centerToolStripMenuItem.Text = "Center";
+            this.centerToolStripMenuItem.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
+            // 
+            // rightToolStripMenuItem
+            // 
+            this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
+            this.rightToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rightToolStripMenuItem.Text = "Right";
+            this.rightToolStripMenuItem.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -155,6 +203,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             this.panelFooter.ResumeLayout(false);
             this.panelFooter.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -169,6 +218,11 @@
         private System.Windows.Forms.Timer timerRemainder;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.LinkLabel linkLabelTotalEvent;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem textAlignToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem leftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem centerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
     }
 }
 

@@ -148,6 +148,7 @@ namespace DesktopStickyNote
         public string RemainTime = "RemainTime";
         public string Position = "Position";
         public string Theme = "Theme";
+        public string TextAlignment = "TextAlignment";
 
     }
 }
