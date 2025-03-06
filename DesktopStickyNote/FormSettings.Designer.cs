@@ -70,11 +70,11 @@
             this.listViewEventList = new System.Windows.Forms.ListView();
             this.columnHeaderId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderAlertFrom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderEventDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderAlertFrom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDetails = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderAlertFromDateFull = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderEventDateFull = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderAlertFromDateFull = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxCategory = new System.Windows.Forms.GroupBox();
             this.listViewCategory = new System.Windows.Forms.ListView();
             this.columnHeaderCategoryId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -642,32 +642,32 @@
             // columnHeaderCategory
             // 
             this.columnHeaderCategory.Text = "Category";
-            this.columnHeaderCategory.Width = 150;
-            // 
-            // columnHeaderAlertFrom
-            // 
-            this.columnHeaderAlertFrom.Text = "Alert From";
-            this.columnHeaderAlertFrom.Width = 0;
+            this.columnHeaderCategory.Width = 145;
             // 
             // columnHeaderEventDate
             // 
             this.columnHeaderEventDate.Text = "Event Date";
             this.columnHeaderEventDate.Width = 80;
             // 
+            // columnHeaderAlertFrom
+            // 
+            this.columnHeaderAlertFrom.Text = "Alert From";
+            this.columnHeaderAlertFrom.Width = 0;
+            // 
             // columnHeaderDetails
             // 
             this.columnHeaderDetails.Text = "Details";
             this.columnHeaderDetails.Width = 120;
             // 
-            // columnHeaderAlertFromDateFull
-            // 
-            this.columnHeaderAlertFromDateFull.Text = "From Full";
-            this.columnHeaderAlertFromDateFull.Width = 0;
-            // 
             // columnHeaderEventDateFull
             // 
             this.columnHeaderEventDateFull.Text = "To Full";
             this.columnHeaderEventDateFull.Width = 0;
+            // 
+            // columnHeaderAlertFromDateFull
+            // 
+            this.columnHeaderAlertFromDateFull.Text = "From Full";
+            this.columnHeaderAlertFromDateFull.Width = 0;
             // 
             // groupBoxCategory
             // 

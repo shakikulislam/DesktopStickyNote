@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DesktopStickyNote.Properties;
 
 namespace DesktopStickyNote
 {
@@ -16,6 +17,14 @@ namespace DesktopStickyNote
         {
             InitializeComponent();
             this.Icon = new FormMain().Icon;
+            if (Settings.Default.AlertLocation.Equals(new Point(0,0)))
+            {
+                this.StartPosition = FormStartPosition.CenterScreen;
+            }
+            else
+            {
+                this.Location = Settings.Default.AlertLocation;
+            }
 
             _id = singleEvent[0];
             _eventDateTime = Convert.ToDateTime(singleEvent[2]).ToString("dd-MMM-yy");
@@ -105,7 +114,21 @@ namespace DesktopStickyNote
             {
                 int x = e.X - _lastMouseLocation.X;
                 int y = e.Y - _lastMouseLocation.Y;
-                Location = new Point(Location.X + x, Location.Y + y);
+
+                Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
+
+                // Calculate the new location based on the mouse movement
+                int newX = Location.X + x;
+                int newY = Location.Y + y;
+
+                // Ensure the new location is within the working area
+                newX = Math.Max(workingArea.Left, Math.Min(workingArea.Right - Width, newX));
+                newY = Math.Max(workingArea.Top, Math.Min(workingArea.Bottom - Height, newY));
+                
+                Location = new Point(newX, newY);
+
+                Settings.Default.AlertLocation = Location;
+                Settings.Default.Save();
             }
         }
 

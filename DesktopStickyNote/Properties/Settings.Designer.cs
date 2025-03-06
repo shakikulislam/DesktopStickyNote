@@ -34,5 +34,17 @@ namespace DesktopStickyNote.Properties {
                 this["LastBackupLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point AlertLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["AlertLocation"]));
+            }
+            set {
+                this["AlertLocation"] = value;
+            }
+        }
     }
 }

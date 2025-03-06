@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -48,23 +49,52 @@ namespace DesktopStickyNote
 
                 if (!string.IsNullOrEmpty(_events))
                 {
-                    listViewEventList.Items.Clear();
+                    var itemTable = new DataTable();
+                    itemTable.Columns.Add("Id");
+                    itemTable.Columns.Add("Category");
+                    itemTable.Columns.Add("EventDate");
+                    itemTable.Columns.Add("AlertFrom");
+                    itemTable.Columns.Add("Details");
+                    itemTable.Columns.Add("EventDateFull", typeof(DateTime));
+                    itemTable.Columns.Add("FromDateFull", typeof(DateTime));
 
                     GlobalSs.Events = _events.Split('|');
                     foreach (var @event in GlobalSs.Events)
                     {
                         var item = @event.Split('~');
-                        
-                        var lvi=new ListViewItem(item[0]);
-                        lvi.SubItems.Add(item[1]);
-                        lvi.SubItems.Add(Convert.ToDateTime(item[2]).ToString("dd-MMM-yy"));
-                        lvi.SubItems.Add(Convert.ToDateTime(item[3]).ToString("dd-MMM-yy"));
-                        lvi.SubItems.Add(item[4]);
-                        lvi.SubItems.Add(item[2]);
-                        lvi.SubItems.Add(item[3]);
 
-                        listViewEventList.Items.Add(lvi);
+                        itemTable.Rows.Add(
+                            item[0], // Id
+                            item[1], // Category
+                            Convert.ToDateTime(item[2]).ToString("dd-MMM-yy"), // EventDate
+                            Convert.ToDateTime(item[3]).ToString("dd-MMM-yy"), // AlertFrom
+                            item[4], // Details
+                            Convert.ToDateTime(item[2]), // EventDateFull
+                            Convert.ToDateTime(item[3])  // FromDateFull
+                        );
                     }
+
+                    // Sort by EventDate (column 2)
+                    DataView sortedView = new DataView(itemTable)
+                    {
+                        Sort = "EventDateFull ASC"  // Sort by EventDate column
+                    };
+                    itemTable = sortedView.ToTable();  // Update itemTable with sorted data
+
+                    listViewEventList.Items.Clear();
+                    foreach (DataRow row in itemTable.Rows)
+                    {
+                        var listViewItem = new ListViewItem(row["Id"].ToString());  // Id as the first column
+                        listViewItem.SubItems.Add(row["Category"].ToString());
+                        listViewItem.SubItems.Add(row["EventDate"].ToString());
+                        listViewItem.SubItems.Add(row["AlertFrom"].ToString());
+                        listViewItem.SubItems.Add(row["Details"].ToString());
+                        listViewItem.SubItems.Add(row["EventDateFull"].ToString());
+                        listViewItem.SubItems.Add(row["FromDateFull"].ToString());
+
+                        listViewEventList.Items.Add(listViewItem);
+                    }
+
                 }
                 else
                 {
